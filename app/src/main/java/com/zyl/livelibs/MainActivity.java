@@ -1,17 +1,15 @@
 package com.zyl.livelibs;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.zyl.livelibs.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
-    // Used to load the 'livelibs' library on application startup.
     static {
-        System.loadLibrary("livelibs");
+        System.loadLibrary("live");
+//        System.loadLibrary("yuv");
     }
 
     private ActivityMainBinding binding;
@@ -29,4 +27,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public native String stringFromJNI();
+
+    public native void NV21toI420(byte[] src, byte[] dest, int height, int width);
 }
