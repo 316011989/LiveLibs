@@ -6,6 +6,11 @@ public class FFmpegApplication extends Application {
 
     private static FFmpegApplication context;
 
+    static {
+        System.loadLibrary("live");
+//        System.loadLibrary("yuv");
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -15,5 +20,6 @@ public class FFmpegApplication extends Application {
     public static FFmpegApplication getInstance() {
         return context;
     }
+
 
 }

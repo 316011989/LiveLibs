@@ -1,16 +1,15 @@
-package com.zyl.livelibs;
+package com.zyl.livelibs.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
+import com.zyl.livelibs.BaseActivity;
 import com.zyl.livelibs.databinding.ActivityMainBinding;
 
 public class MainActivity extends BaseActivity {
 
-    static {
-        System.loadLibrary("live");
-//        System.loadLibrary("yuv");
-    }
 
     private ActivityMainBinding binding;
 
@@ -23,10 +22,12 @@ public class MainActivity extends BaseActivity {
 
         // Example of a call to a native method
         TextView tv = binding.sampleText;
-        tv.setText(stringFromJNI());
+        tv.setText("native 方法在application中");
+        tv.setOnClickListener(view -> {
+            Intent intent = new Intent().setClass(this, LiveActivity.class);
+            startActivity(intent);
+        });
     }
 
-    public native String stringFromJNI();
 
-    public native void NV21toI420(byte[] src, byte[] dest, int height, int width);
 }

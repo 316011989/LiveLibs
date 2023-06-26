@@ -2,22 +2,22 @@
 #include <string>
 #include "libyuv/convert.h"
 
-extern "C" JNIEXPORT jstring JNICALL
-Java_com_zyl_livelibs_MainActivity_stringFromJNI(
-        JNIEnv *env,
-        jobject /* this */) {
-    std::string hello = "Hello from C++";
-    return env->NewStringUTF(hello.c_str());
-}
+////demo
+//extern "C" JNIEXPORT jstring JNICALL
+//Java_com_zyl_livelibs_MainActivity_stringFromJNI(
+//        JNIEnv *env,
+//        jobject /* this */) {
+//    std::string hello = "Hello from C++";
+//    return env->NewStringUTF(hello.c_str());
+//}
 
 
 
 /**
  * NV21 -> I420
  */
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_zyl_livelibs_MainActivity_NV21toI420(JNIEnv *env, jobject instance, jbyteArray input_,
+extern "C" JNIEXPORT void JNICALL
+Java_com_zyl_livelibs_util_YuvUtil_NV21toI420(JNIEnv *env, jobject instance, jbyteArray input_,
                                               jbyteArray output_, jint in_width, jint in_height) {
     jbyte *srcData = env->GetByteArrayElements(input_, NULL);
     jbyte *dstData = env->GetByteArrayElements(output_, NULL);
@@ -34,7 +34,7 @@ Java_com_zyl_livelibs_MainActivity_NV21toI420(JNIEnv *env, jobject instance, jby
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_zyl_livelibs_MainActivity_rotate(JNIEnv *env, jobject type, jbyteArray input_,
+Java_com_zyl_livelibs_util_YuvUtil_rotate(JNIEnv *env, jobject type, jbyteArray input_,
                                           jbyteArray output_, jint in_width, jint in_height,
                                           jint rotation) {
     jbyte *srcData = env->GetByteArrayElements(input_, NULL);
@@ -68,7 +68,7 @@ Java_com_zyl_livelibs_MainActivity_rotate(JNIEnv *env, jobject type, jbyteArray 
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_zyl_livelibs_MainActivity_NV21ToI420andRotate90(JNIEnv *env, jobject type,
+Java_com_zyl_livelibs_util_YuvUtil_NV21ToI420andRotate90(JNIEnv *env, jobject type,
                                                              jbyteArray input_,
                                                              jbyteArray output_,
                                                              jint in_width, jint in_height) {
