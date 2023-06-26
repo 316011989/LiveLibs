@@ -61,7 +61,7 @@ include_directories(include/)
 #
 
 
-add_library(live SHARED native-lib.cpp)
+add_library(live STATIC native-lib.cpp)
 
 add_library(yuv STATIC IMPORTED)
 set_target_properties(yuv PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libyuv.a)
