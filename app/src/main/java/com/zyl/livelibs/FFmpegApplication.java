@@ -8,7 +8,6 @@ public class FFmpegApplication extends Application {
 
     static {
         System.loadLibrary("live");
-//        System.loadLibrary("yuv");
     }
 
     @Override
