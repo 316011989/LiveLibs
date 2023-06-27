@@ -586,11 +586,16 @@ public class Camera2Helper {
                     if (dstData == null) {
                         dstData = new byte[len * 3 / 2];
                     }
-                    if (rotateDegree == 90) {
-                        YuvUtil.NV21toI420(yuvData, dstData, width, height, 270);
-                    } else {
-                        YuvUtil.NV21toI420(yuvData, dstData, width, height, 270);
-                    }
+//                    if (rotateDegree == 90) {
+                    //
+                    YuvUtil.NV21toI420(yuvData, dstData, width, height, 270);
+                    yuvData = dstData;
+                    dstData = new byte[len * 3 / 2];
+                    YuvUtil.I420Mirror(yuvData, dstData, height, width);
+//                    } else {
+//                        YuvUtil.NV21toI420(yuvData, dstData, width, height, 90);
+//                        YuvUtil.I420Mirror(dstData, dstData, height, width);
+//                    }
                     if (camera2Listener != null) {
                         camera2Listener.onPreviewFrame(dstData);
                     }
