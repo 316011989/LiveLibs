@@ -587,9 +587,9 @@ public class Camera2Helper {
                         dstData = new byte[len * 3 / 2];
                     }
                     if (rotateDegree == 90) {
-                        YuvUtil.NV21ToI420andRotate90(yuvData, dstData, width, height);
+                        YuvUtil.NV21toI420(yuvData, dstData, width, height, 270);
                     } else {
-                        YuvUtil.NV21ToI420andRotate90(yuvData, dstData, width, height);
+                        YuvUtil.NV21toI420(yuvData, dstData, width, height, 270);
                     }
                     if (camera2Listener != null) {
                         camera2Listener.onPreviewFrame(dstData);

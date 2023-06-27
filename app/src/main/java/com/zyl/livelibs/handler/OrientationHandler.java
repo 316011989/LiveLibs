@@ -66,7 +66,7 @@ public class OrientationHandler {
         }
     }
 
-    void disable() {
+    public void disable() {
         if (orientationEventListener.canDetectOrientation()) {
             orientationEventListener.disable();
         }
