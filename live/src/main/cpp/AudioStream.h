@@ -2,8 +2,8 @@
 #ifndef AUDIOSTREAM_H
 #define AUDIOSTREAM_H
 
-#include "fdk-aac/aacenc_lib.h"
 #include "rtmp/rtmp.h"
+#include "faac/faac.h"
 #include <sys/types.h>
 
 class AudioStream {
@@ -12,15 +12,10 @@ class AudioStream {
 private:
     AudioCallback audioCallback;
     int m_channels;
-    HANDLE_AACENCODER aacEncoder;
-    //编码器实例信息结构体
-    AACENC_InfoStruct info = {0};
-    //采样率
-    int sampleRate = 8000;
-    //码率
-    int bitRate = 64000;
-    //
-    int inputSize;
+    faacEncHandle m_audioCodec = 0;
+    u_long m_inputSamples;
+    u_long m_maxOutputBytes;
+    u_char *m_buffer = 0;
 
 public:
     AudioStream();
@@ -31,9 +26,11 @@ public:
 
     void setAudioCallback(AudioCallback audioCallback);
 
-    void encodeData(JNIEnv *env,int8_t *data);
-
     int getInputSamples() const;
+
+    void encodeData(int8_t *data);
+
+    RTMPPacket *getAudioTag();
 
 };
 

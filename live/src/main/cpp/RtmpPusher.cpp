@@ -185,7 +185,7 @@ RTMP_PUSHER_FUNC(void, native_1pushAudio, jbyteArray pcmData_) {
         return;
     }
     jbyte *data = env->GetByteArrayElements(pcmData_, nullptr);
-    audioStream->encodeData(env,data);
+    audioStream->encodeData(data);
     env->ReleaseByteArrayElements(pcmData_, data, 0);
 }
 
