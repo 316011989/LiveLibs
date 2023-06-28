@@ -122,7 +122,7 @@ void *start(void *args) {
 }
 
 RTMP_PUSHER_FUNC(void, native_1init) {
-    LOGI("native init...");
+    LOG_I("native init...");
     videoStream = new VideoStream();
     videoStream->setVideoCallback(callback);
     audioStream = new AudioStream();
@@ -142,7 +142,7 @@ RTMP_PUSHER_FUNC(void, native_1setVideoCodecInfo,
 }
 
 RTMP_PUSHER_FUNC(void, native_1start, jstring path_) {
-    LOGI("native start...");
+    LOG_I("native start...");
     if (isPushing) {
         return;
     }
@@ -180,23 +180,23 @@ RTMP_PUSHER_FUNC(jint, native_1getInputSamples) {
     return -1;
 }
 
-RTMP_PUSHER_FUNC(void, native_1pushAudio, jbyteArray data_) {
+RTMP_PUSHER_FUNC(void, native_1pushAudio, jbyteArray pcmData_) {
     if (!audioStream || !isPushing) {
         return;
     }
-    jbyte *data = env->GetByteArrayElements(data_, nullptr);
-    audioStream->encodeData(data);
-    env->ReleaseByteArrayElements(data_, data, 0);
+    jbyte *data = env->GetByteArrayElements(pcmData_, nullptr);
+    audioStream->encodeData(env,data);
+    env->ReleaseByteArrayElements(pcmData_, data, 0);
 }
 
 RTMP_PUSHER_FUNC(void, native_1stop) {
-    LOGI("native stop...");
+    LOG_I("native stop...");
     isPushing = false;
     packets.setRunning(false);
 }
 
 RTMP_PUSHER_FUNC(void, native_1release) {
-    LOGI("native release...");
+    LOG_I("native release...");
     env->DeleteGlobalRef(jobject_error);
     delete videoStream;
     videoStream = nullptr;

@@ -587,7 +587,6 @@ public class Camera2Helper {
                         dstData = new byte[len * 3 / 2];
                     }
 //                    if (rotateDegree == 90) {
-                    //
                     YuvUtil.NV21toI420(yuvData, dstData, width, height, 270);
                     yuvData = dstData;
                     dstData = new byte[len * 3 / 2];

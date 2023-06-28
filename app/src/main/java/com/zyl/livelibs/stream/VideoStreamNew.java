@@ -55,7 +55,7 @@ public class VideoStreamNew extends VideoStreamBase
         }
         camera2Helper = new Camera2Helper.Builder()
                 .cameraListener(this)
-                .specificCameraId(Camera2Helper.CAMERA_ID_BACK)
+                .specificCameraId("" + mVideoParam.getCameraId())
                 .context(mContext.getApplicationContext())
                 .previewOn(mTextureView)
                 .previewViewSize(new Point(mVideoParam.getWidth(), mVideoParam.getHeight()))

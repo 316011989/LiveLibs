@@ -1,5 +1,6 @@
 
 #include <cstring>
+#include <sstream>
 #include <jni.h>
 #include "AudioStream.h"
 #include "PushInterface.h"
@@ -56,7 +57,7 @@ int AudioStream::getInputSamples() const {
 }
 
 
-void AudioStream::encodeData( jbyte *pcmData) {
+void AudioStream::encodeData(JNIEnv *env, jbyte *pcmData) {
     //接收音频缓冲区大小,pcmLength的长度要与初始化中的inputSize 相等
     int in_size = inputSize;
     //接收音频buffer
@@ -111,26 +112,27 @@ void AudioStream::encodeData( jbyte *pcmData) {
         LOGE("编码结束,已到达文件末尾");
     } else if (ret == AACENC_OK) {
         //得到结果,调用java方法输出
-        if (out_buf.numBufs > 0) {
-            int bodySize = 2 + out_buf.numBufs;
-            auto *packet = new RTMPPacket();
-            RTMPPacket_Alloc(packet, bodySize);
-            //stereo
-            packet->m_body[0] = 0xAF;
-            if (m_channels == 1) {
-                packet->m_body[0] = 0xAE;
-            }
-
-            packet->m_body[1] = 0x01;
-            memcpy(&packet->m_body[2], m_buffer, static_cast<size_t>(out_buf.numBufs));
-
-            packet->m_hasAbsTimestamp = 0;
-            packet->m_nBodySize       = bodySize;
-            packet->m_packetType      = RTMP_PACKET_TYPE_AUDIO;
-            packet->m_nChannel        = 0x11;
-            packet->m_headerType      = RTMP_PACKET_SIZE_LARGE;
-            audioCallback(packet);
+        jbyteArray aacArray = env->NewByteArray(out_args.numOutBytes);
+        jsize byteLen = (*env).GetArrayLength(aacArray);
+        LOGE("编码pcm长度:%d", byteLen);
+        int bodySize = 2 + byteLen;
+        auto *packet = new RTMPPacket();
+        RTMPPacket_Alloc(packet, bodySize);
+        //stereo
+        packet->m_body[0] = 0xAF;
+        if (m_channels == 1) {
+            packet->m_body[0] = 0xAE;
         }
+
+        packet->m_body[1] = 0x01;
+        memcpy(&packet->m_body[2], out_buf.bufs, static_cast<size_t>(byteLen));
+
+        packet->m_hasAbsTimestamp = 0;
+        packet->m_nBodySize       = bodySize;
+        packet->m_packetType      = RTMP_PACKET_TYPE_AUDIO;
+        packet->m_nChannel        = 0x11;
+        packet->m_headerType      = RTMP_PACKET_SIZE_LARGE;
+        audioCallback(packet);
     } else {
         LOGE("失败");
     }
@@ -142,4 +144,6 @@ AudioStream::~AudioStream() {
         aacEncClose(&aacEncoder);
     }
 }
+
+
 

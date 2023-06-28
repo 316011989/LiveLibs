@@ -25,7 +25,7 @@ public class LivePusherNew implements OnFrameDataCallback {
         System.loadLibrary("live");
     }
 
-//    private final AudioStream audioStream;
+    private final AudioStream audioStream;
     private VideoStreamBase videoStream;
 
     private LiveStateChangeListener liveStateChangeListener;
@@ -39,7 +39,7 @@ public class LivePusherNew implements OnFrameDataCallback {
                          CameraType cameraType) {
         this.activity = activity;
         native_init();
-//        audioStream = new AudioStream(this, audioParam);
+        audioStream = new AudioStream(this, audioParam);
         if (cameraType == CameraType.CAMERA1) {
             videoStream = new VideoStream(this, view, videoParam, activity);
         } else if (cameraType == CameraType.CAMERA2) {
@@ -65,25 +65,25 @@ public class LivePusherNew implements OnFrameDataCallback {
      * @param isMute is mute or not
      */
     public void setMute(boolean isMute) {
-//        audioStream.setMute(isMute);
+        audioStream.setMute(isMute);
     }
 
     public void startPush(String path, LiveStateChangeListener stateChangeListener) {
         this.liveStateChangeListener = stateChangeListener;
         native_start(path);
         videoStream.startLive();
-//        audioStream.startLive();
+        audioStream.startLive();
     }
 
     public void stopPush() {
         videoStream.stopLive();
-//        audioStream.stopLive();
+        audioStream.stopLive();
         native_stop();
     }
 
     public void release() {
         videoStream.release();
-//        audioStream.release();
+        audioStream.release();
         native_release();
     }
 
@@ -185,7 +185,7 @@ public class LivePusherNew implements OnFrameDataCallback {
 
     private native int native_getInputSamples();
 
-    private native void native_pushAudio(byte[] data);
+    private native void native_pushAudio(byte[] pcmData);
 
     private native void native_pushVideo(byte[] yuv, int cameraType);
 

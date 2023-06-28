@@ -21,7 +21,6 @@ private:
     int bitRate = 64000;
     //
     int inputSize;
-    u_char *m_buffer = 0;
 
 public:
     AudioStream();
@@ -32,9 +31,10 @@ public:
 
     void setAudioCallback(AudioCallback audioCallback);
 
-    void encodeData(int8_t *data);
+    void encodeData(JNIEnv *env,int8_t *data);
 
     int getInputSamples() const;
+
 };
 
 
