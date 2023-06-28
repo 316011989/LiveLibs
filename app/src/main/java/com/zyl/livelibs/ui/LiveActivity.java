@@ -15,18 +15,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.zyl.live.camera.Camera2Helper;
+import com.zyl.live.camera.CameraType;
+import com.zyl.live.handler.ConnectionReceiver;
+import com.zyl.live.handler.OrientationHandler;
+import com.zyl.live.listener.LiveStateChangeListener;
+import com.zyl.live.listener.OnNetworkChangeListener;
+import com.zyl.live.param.AudioParam;
+import com.zyl.live.param.VideoParam;
+import com.zyl.live.stream.LivePusherNew;
 import com.zyl.livelibs.BaseActivity;
 import com.zyl.livelibs.R;
-import com.zyl.livelibs.camera.Camera2Helper;
-import com.zyl.livelibs.camera.CameraType;
 import com.zyl.livelibs.databinding.ActivityLiveBinding;
-import com.zyl.livelibs.handler.ConnectionReceiver;
-import com.zyl.livelibs.handler.OrientationHandler;
-import com.zyl.livelibs.listener.LiveStateChangeListener;
-import com.zyl.livelibs.listener.OnNetworkChangeListener;
-import com.zyl.livelibs.param.AudioParam;
-import com.zyl.livelibs.param.VideoParam;
-import com.zyl.livelibs.stream.LivePusherNew;
 
 public class LiveActivity extends BaseActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, OnNetworkChangeListener, LiveStateChangeListener {
     private final String TAG = LiveActivity.class.getSimpleName();

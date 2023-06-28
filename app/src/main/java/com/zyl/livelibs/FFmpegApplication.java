@@ -6,10 +6,6 @@ public class FFmpegApplication extends Application {
 
     private static FFmpegApplication context;
 
-    static {
-        System.loadLibrary("live");
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
