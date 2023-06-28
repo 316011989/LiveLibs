@@ -3,16 +3,7 @@
 #include "libyuv/convert.h"
 #include "libyuv/rotate.h"
 #include "libyuv/scale.h"
-#include "include/armeabi-v7a/libyuv/scale.h"
 
-////demo
-//extern "C" JNIEXPORT jstring JNICALL
-//Java_com_zyl_live_MainActivity_stringFromJNI(
-//        JNIEnv *env,
-//        jobject /* this */) {
-//    std::string hello = "Hello from C++";
-//    return env->NewStringUTF(hello.c_str());
-//}
 
 
 
@@ -20,7 +11,7 @@
  * NV21 -> I420
  */
 extern "C" JNIEXPORT void JNICALL
-Java_com_zyl_live_util_YuvUtil_NV21toI420(JNIEnv *env, jobject instance, jbyteArray input_,
+Java_com_zyl_live_util_YuvUtil_NV21toI420(JNIEnv *env, jclass instance, jbyteArray input_,
                                               jbyteArray output_, jint in_width, jint in_height,
                                               jint rotation) {
     jbyte *srcData = env->GetByteArrayElements(input_, NULL);
@@ -83,7 +74,7 @@ Java_com_zyl_live_util_YuvUtil_NV21toI420(JNIEnv *env, jobject instance, jbyteAr
  * NV21 -> I420
  */
 extern "C" JNIEXPORT void JNICALL
-Java_com_zyl_live_util_YuvUtil_I420Mirror(JNIEnv *env, jobject instance, jbyteArray input_,
+Java_com_zyl_live_util_YuvUtil_I420Mirror(JNIEnv *env, jclass instance, jbyteArray input_,
                                               jbyteArray output_, jint in_width, jint in_height) {
     jbyte *srcData = env->GetByteArrayElements(input_, NULL);
     jbyte *dstData = env->GetByteArrayElements(output_, NULL);
