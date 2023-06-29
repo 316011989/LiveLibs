@@ -7,8 +7,8 @@
 
     <TextureView
         android:id="@+id/surface_camera"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="192dp"
+        android:layout_height="256dp" />
 
     <Button
         android:id="@+id/btn_swap"

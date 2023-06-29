@@ -549,7 +549,6 @@ public class Camera2Helper {
             if (camera2Listener != null && image.getFormat() == ImageFormat.YUV_420_888) {
                 Image.Plane[] planes = image.getPlanes();
                 lock.lock();
-
                 int offset = 0;
                 int width = image.getWidth();
                 int height = image.getHeight();
@@ -583,26 +582,30 @@ public class Camera2Helper {
                     offset += len / 4;
                 }
 
-                if (rotateDegree == 90 || rotateDegree == 180) {
-                    if (dstData == null) {
-                        dstData = new byte[len * 3 / 2];
-                    }
-//                    if (rotateDegree == 90) {
-                    YuvUtil.NV21toI420(yuvData, dstData, width, height, 270);
+                if (dstData == null) {
+                    dstData = new byte[len * 3 / 2];
+                }
+                if (rotateDegree == 90) {
+                    YuvUtil.NV21toI420andRotate(yuvData, dstData, width, height, 270);
                     yuvData = dstData;
                     dstData = new byte[len * 3 / 2];
                     YuvUtil.I420Mirror(yuvData, dstData, height, width);
-//                    } else {
-//                        YuvUtil.NV21toI420(yuvData, dstData, width, height, 90);
-//                        YuvUtil.I420Mirror(dstData, dstData, height, width);
-//                    }
-                    if (camera2Listener != null) {
-                        camera2Listener.onPreviewFrame(dstData);
-                    }
-                } else {
-                    if (camera2Listener != null) {
-                        camera2Listener.onPreviewFrame(yuvData);
-                    }
+                } else if (rotateDegree == 270) {
+                    YuvUtil.NV21toI420andRotate(yuvData, dstData, width, height, 90);
+                    yuvData = dstData;
+                    dstData = new byte[len * 3 / 2];
+                    YuvUtil.I420Mirror(yuvData, dstData, height, width);
+                    Log.e("John rotate", "角度90,宽" + width + "高" + height);
+                } else if (rotateDegree == 180) {
+//                    YuvUtil.NV21toI420(yuvData, dstData, width, height);
+                    YuvUtil.NV21toI420andRotate(yuvData, dstData, width, height, 180);
+                    Log.e("John rotate", "角度180,宽" + width + "高" + height);
+                } else if (rotateDegree == 0) {
+//                    YuvUtil.NV21toI420(yuvData, dstData, width, height);
+                    Log.e("John rotate", "角度0,宽" + width + "高" + height);
+                }
+                if (camera2Listener != null) {
+                    camera2Listener.onPreviewFrame(dstData);
                 }
 
                 lock.unlock();
