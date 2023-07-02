@@ -2,7 +2,11 @@ cmake_minimum_required(VERSION 3.22.1)
 
 project("livelibs")
 
-include_directories(include/${CMAKE_ANDROID_ARCH_ABI}/)
+include_directories(
+        include/${CMAKE_ANDROID_ARCH_ABI}/
+        include/${CMAKE_ANDROID_ARCH_ABI}/libavcodec
+        include/${CMAKE_ANDROID_ARCH_ABI}/faac
+        )
 #include_directories(include/${CMAKE_ANDROID_ARCH_ABI}/polarssl/)
 #include_directories(include/${CMAKE_ANDROID_ARCH_ABI}/librtmp/)
 
@@ -23,8 +27,6 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/rtmp)
 #add_library(rtmp SHARED IMPORTED)
 #set_target_properties(rtmp PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/librtmp.a)
 
-#add_library(faac STATIC IMPORTED)
-#set_target_properties(faac PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libfdk-aac.a)
 
 add_library(faac STATIC IMPORTED)
 set_target_properties(faac PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libfaac.a)
