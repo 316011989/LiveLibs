@@ -3,7 +3,7 @@
 #define AUDIOSTREAM_H
 
 #include "rtmp/rtmp.h"
-#include "faac.h"
+#include "faac/faac.h"
 #include <sys/types.h>
 
 class AudioStream {

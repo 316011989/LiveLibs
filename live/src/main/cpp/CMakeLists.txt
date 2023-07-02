@@ -4,14 +4,12 @@ project("livelibs")
 
 include_directories(
         include/${CMAKE_ANDROID_ARCH_ABI}/
-        include/${CMAKE_ANDROID_ARCH_ABI}/libavcodec
-        include/${CMAKE_ANDROID_ARCH_ABI}/faac
         )
 #include_directories(include/${CMAKE_ANDROID_ARCH_ABI}/polarssl/)
 #include_directories(include/${CMAKE_ANDROID_ARCH_ABI}/librtmp/)
 
 
-add_library(live SHARED
+add_library(live STATIC
         native-lib.cpp
         AudioStream.cpp
         VideoStream.cpp

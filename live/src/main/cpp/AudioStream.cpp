@@ -2,6 +2,7 @@
 #include <cstring>
 #include "AudioStream.h"
 #include "PushInterface.h"
+#include "faac/faac.h"
 
 AudioStream::AudioStream() {
 
