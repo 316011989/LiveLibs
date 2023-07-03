@@ -1,0 +1,170 @@
+[
+  {
+    "level_": 0,
+    "message_": "Start JSON generation. Platform version: 21 min SDK version: arm64-v8a",
+    "file_": "E:\\workspace\\LiveLibs\\player\\src\\main\\cpp\\CMakeLists.txt",
+    "tag_": "release|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1306256053
+  },
+  {
+    "level_": 0,
+    "message_": "rebuilding JSON E:\\workspace\\LiveLibs\\player\\.cxx\\RelWithDebInfo\\5m4h3p6u\\arm64-v8a\\android_gradle_build.json due to:",
+    "file_": "E:\\workspace\\LiveLibs\\player\\src\\main\\cpp\\CMakeLists.txt",
+    "tag_": "release|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1692356993
+  },
+  {
+    "level_": 0,
+    "message_": "- expected json E:\\workspace\\LiveLibs\\player\\.cxx\\RelWithDebInfo\\5m4h3p6u\\arm64-v8a\\android_gradle_build.json file is not present, will remove stale json folder",
+    "file_": "E:\\workspace\\LiveLibs\\player\\src\\main\\cpp\\CMakeLists.txt",
+    "tag_": "release|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 502153569
+  },
+  {
+    "level_": 0,
+    "message_": "- missing previous command file E:\\workspace\\LiveLibs\\player\\.cxx\\RelWithDebInfo\\5m4h3p6u\\arm64-v8a\\metadata_generation_command.txt, will remove stale json folder",
+    "file_": "E:\\workspace\\LiveLibs\\player\\src\\main\\cpp\\CMakeLists.txt",
+    "tag_": "release|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -83585601
+  },
+  {
+    "level_": 0,
+    "message_": "- command changed from previous, will remove stale json folder",
+    "file_": "E:\\workspace\\LiveLibs\\player\\src\\main\\cpp\\CMakeLists.txt",
+    "tag_": "release|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1829276807
+  },
+  {
+    "level_": 0,
+    "message_": "created folder \u0027E:\\workspace\\LiveLibs\\player\\.cxx\\RelWithDebInfo\\5m4h3p6u\\arm64-v8a\u0027",
+    "file_": "E:\\workspace\\LiveLibs\\player\\src\\main\\cpp\\CMakeLists.txt",
+    "tag_": "release|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1591742581
+  },
+  {
+    "level_": 0,
+    "message_": "executing cmake Executable : C:\\Users\\Lenovo\\AppData\\Local\\Android\\Sdk\\cmake\\3.18.1\\bin\\cmake.exe\narguments : \n-HE:\\workspace\\LiveLibs\\player\\src\\main\\cpp\n-DCMAKE_SYSTEM_NAME\u003dAndroid\n-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\n-DCMAKE_SYSTEM_VERSION\u003d21\n-DANDROID_ABI\u003darm64-v8a\n-DCMAKE_ANDROID_ARCH_ABI\u003darm64-v8a\n-DANDROID_NDK\u003dC:\\Users\\Lenovo\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\n-DCMAKE_ANDROID_NDK\u003dC:\\Users\\Lenovo\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\n-DCMAKE_TOOLCHAIN_FILE\u003dC:\\Users\\Lenovo\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\build\\cmake\\android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003dC:\\Users\\Lenovo\\AppData\\Local\\Android\\Sdk\\cmake\\3.18.1\\bin\\ninja.exe\n-DCMAKE_C_FLAGS\u003d-DANDROID -DNDEBUG -D__STDC_CONSTANT_MACROS -Os -mfpu\u003dneon-vfpv4 -mfloat-abi\u003dsoftfp\n-DCMAKE_CXX_FLAGS\u003d-std\u003dc++11 -DHAVE_PTHREADS -fexceptions\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dE:\\workspace\\LiveLibs\\player\\build\\intermediates\\cxx\\RelWithDebInfo\\5m4h3p6u\\obj\\arm64-v8a\n-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dE:\\workspace\\LiveLibs\\player\\build\\intermediates\\cxx\\RelWithDebInfo\\5m4h3p6u\\obj\\arm64-v8a\n-DCMAKE_BUILD_TYPE\u003dRelWithDebInfo\n-BE:\\workspace\\LiveLibs\\player\\.cxx\\RelWithDebInfo\\5m4h3p6u\\arm64-v8a\n-GNinja\n-DANDROID_PLATFORM\u003dandroid-21\n-DANDROID_TOOLCHAIN\u003dclang\n-DANDROID_STL\u003dc++_static\njvmArgs : \n\n",
+    "file_": "E:\\workspace\\LiveLibs\\player\\src\\main\\cpp\\CMakeLists.txt",
+    "tag_": "release|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 799819928
+  },
+  {
+    "level_": 0,
+    "message_": "Executable : C:\\Users\\Lenovo\\AppData\\Local\\Android\\Sdk\\cmake\\3.18.1\\bin\\cmake.exe\narguments : \n-HE:\\workspace\\LiveLibs\\player\\src\\main\\cpp\n-DCMAKE_SYSTEM_NAME\u003dAndroid\n-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\n-DCMAKE_SYSTEM_VERSION\u003d21\n-DANDROID_ABI\u003darm64-v8a\n-DCMAKE_ANDROID_ARCH_ABI\u003darm64-v8a\n-DANDROID_NDK\u003dC:\\Users\\Lenovo\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\n-DCMAKE_ANDROID_NDK\u003dC:\\Users\\Lenovo\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\n-DCMAKE_TOOLCHAIN_FILE\u003dC:\\Users\\Lenovo\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\build\\cmake\\android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003dC:\\Users\\Lenovo\\AppData\\Local\\Android\\Sdk\\cmake\\3.18.1\\bin\\ninja.exe\n-DCMAKE_C_FLAGS\u003d-DANDROID -DNDEBUG -D__STDC_CONSTANT_MACROS -Os -mfpu\u003dneon-vfpv4 -mfloat-abi\u003dsoftfp\n-DCMAKE_CXX_FLAGS\u003d-std\u003dc++11 -DHAVE_PTHREADS -fexceptions\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dE:\\workspace\\LiveLibs\\player\\build\\intermediates\\cxx\\RelWithDebInfo\\5m4h3p6u\\obj\\arm64-v8a\n-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dE:\\workspace\\LiveLibs\\player\\build\\intermediates\\cxx\\RelWithDebInfo\\5m4h3p6u\\obj\\arm64-v8a\n-DCMAKE_BUILD_TYPE\u003dRelWithDebInfo\n-BE:\\workspace\\LiveLibs\\player\\.cxx\\RelWithDebInfo\\5m4h3p6u\\arm64-v8a\n-GNinja\n-DANDROID_PLATFORM\u003dandroid-21\n-DANDROID_TOOLCHAIN\u003dclang\n-DANDROID_STL\u003dc++_static\njvmArgs : \n\n",
+    "file_": "E:\\workspace\\LiveLibs\\player\\src\\main\\cpp\\CMakeLists.txt",
+    "tag_": "release|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1767066665
+  },
+  {
+    "level_": 0,
+    "message_": "Exiting generation of E:\\workspace\\LiveLibs\\player\\.cxx\\RelWithDebInfo\\5m4h3p6u\\arm64-v8a\\compile_commands.json.bin normally",
+    "file_": "E:\\workspace\\LiveLibs\\player\\src\\main\\cpp\\CMakeLists.txt",
+    "tag_": "release|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 354489291
+  },
+  {
+    "level_": 0,
+    "message_": "done executing cmake",
+    "file_": "E:\\workspace\\LiveLibs\\player\\src\\main\\cpp\\CMakeLists.txt",
+    "tag_": "release|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -2141623058
+  },
+  {
+    "level_": 0,
+    "message_": "write command file E:\\workspace\\LiveLibs\\player\\.cxx\\RelWithDebInfo\\5m4h3p6u\\arm64-v8a\\metadata_generation_command.txt",
+    "file_": "E:\\workspace\\LiveLibs\\player\\src\\main\\cpp\\CMakeLists.txt",
+    "tag_": "release|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1398800437
+  },
+  {
+    "level_": 0,
+    "message_": "JSON generation completed without problems",
+    "file_": "E:\\workspace\\LiveLibs\\player\\src\\main\\cpp\\CMakeLists.txt",
+    "tag_": "release|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -203549974
+  }
+]

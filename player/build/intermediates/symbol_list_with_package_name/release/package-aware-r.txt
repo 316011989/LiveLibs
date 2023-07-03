@@ -1,0 +1,21 @@
+com.rockcarry.fanplayer
+drawable ic_launcher
+drawable ic_launcher_black
+drawable ic_launcher_red
+drawable ic_launcher_white
+drawable icn_media_pause
+drawable icn_media_pause_focused_holo_dark
+drawable icn_media_pause_normal_holo_dark
+drawable icn_media_pause_pressed_holo_dark
+drawable icn_media_play
+drawable icn_media_play_focused_holo_dark
+drawable icn_media_play_normal_holo_dark
+drawable icn_media_play_pressed_holo_dark
+id btn_playpause
+id buffering
+id player_root
+id seek_bar
+id video_view
+layout main
+string app_name
+string open_video_failed

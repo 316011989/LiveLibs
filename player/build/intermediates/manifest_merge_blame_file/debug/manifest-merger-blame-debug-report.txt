@@ -1,0 +1,153 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.rockcarry.fanplayer"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:8:5-67
+11-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:8:22-64
+12    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
+12-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:9:5-78
+12-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:9:22-75
+13    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+13-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:10:5-81
+13-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:10:22-78
+14
+15    <application>
+15-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:12:5-61:19
+16        <activity
+16-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:13:9-60:20
+17            android:name="com.rockcarry.fanplayer.MainActivity"
+17-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:14:13-41
+18            android:configChanges="keyboardHidden|orientation|screenSize"
+18-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:18:13-74
+19            android:exported="true"
+19-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:17:13-36
+20            android:label="@string/app_name"
+20-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:15:13-45
+21            android:launchMode="singleTask" >
+21-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:16:13-44
+22
+23            <!-- <intent-filter> -->
+24            <!-- <action android:name="android.intent.action.MAIN" /> -->
+25            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+26            <!-- </intent-filter> -->
+27            <intent-filter>
+27-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:23:13-29:29
+28                <action android:name="android.intent.action.VIEW" />
+28-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:24:17-69
+28-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:24:25-66
+29
+30                <category android:name="android.intent.category.DEFAULT" />
+30-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:25:17-76
+30-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:25:27-73
+31                <category android:name="android.intent.category.BROWSABLE" />
+31-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:26:17-78
+31-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:26:27-75
+32
+33                <data android:scheme="rtsp" />
+33-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+33-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:23-44
+34                <data android:scheme="rtmp" />
+34-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+34-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:23-44
+35            </intent-filter>
+36            <intent-filter>
+36-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:30:13-48:29
+37                <action android:name="android.intent.action.VIEW" />
+37-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:24:17-69
+37-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:24:25-66
+38
+39                <category android:name="android.intent.category.DEFAULT" />
+39-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:25:17-76
+39-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:25:27-73
+40                <category android:name="android.intent.category.BROWSABLE" />
+40-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:26:17-78
+40-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:26:27-75
+41
+42                <data android:scheme="http" />
+42-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+42-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:23-44
+43                <data android:scheme="https" />
+43-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+43-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:23-44
+44                <data android:scheme="content" />
+44-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+44-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:23-44
+45                <data android:scheme="file" />
+45-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+45-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:23-44
+46                <data android:mimeType="video/mpeg4" />
+46-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+46-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+47                <data android:mimeType="video/mp4" />
+47-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+47-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+48                <data android:mimeType="video/3gp" />
+48-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+48-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+49                <data android:mimeType="video/3gpp" />
+49-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+49-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+50                <data android:mimeType="video/3gpp2" />
+50-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+50-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+51                <data android:mimeType="video/webm" />
+51-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+51-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+52                <data android:mimeType="video/avi" />
+52-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+52-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+53                <data android:mimeType="video/rmvb" />
+53-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+53-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+54                <data android:mimeType="audio/*" />
+54-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+54-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+55                <data android:mimeType="application/sdp" />
+55-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+55-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+56            </intent-filter>
+57            <intent-filter>
+57-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:49:13-59:29
+58                <action android:name="android.intent.action.VIEW" />
+58-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:24:17-69
+58-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:24:25-66
+59
+60                <category android:name="android.intent.category.DEFAULT" />
+60-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:25:17-76
+60-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:25:27-73
+61                <category android:name="android.intent.category.BROWSABLE" />
+61-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:26:17-78
+61-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:26:27-75
+62
+63                <data android:scheme="http" />
+63-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+63-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:23-44
+64                <data android:scheme="https" />
+64-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+64-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:23-44
+65                <data android:mimeType="audio/x-mpegurl" />
+65-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+65-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+66                <data android:mimeType="audio/mpegurl" />
+66-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+66-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+67                <data android:mimeType="application/vnd.apple.mpegurl" />
+67-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+67-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+68                <data android:mimeType="application/x-mpegurl" />
+68-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
+68-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
+69            </intent-filter>
+70        </activity>
+71    </application>
+72
+73</manifest>
