@@ -2,14 +2,12 @@ cmake_minimum_required(VERSION 3.22.1)
 
 project("livelibs")
 
-include_directories(
-        include/${CMAKE_ANDROID_ARCH_ABI}/
-        )
+include_directories(include)
 #include_directories(include/${CMAKE_ANDROID_ARCH_ABI}/polarssl/)
 #include_directories(include/${CMAKE_ANDROID_ARCH_ABI}/librtmp/)
 
 
-add_library(live STATIC
+add_library(live SHARED
         native-lib.cpp
         AudioStream.cpp
         VideoStream.cpp
