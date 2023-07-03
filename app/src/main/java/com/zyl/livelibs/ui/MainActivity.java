@@ -35,10 +35,14 @@ public class MainActivity extends BaseActivity {
 
         }
         // Example of a call to a native method
-        TextView tv = binding.sampleText;
-        tv.setText("native 方法在application中");
-        tv.setOnClickListener(view -> {
+        TextView btnPush = binding.btnPush;
+        btnPush.setOnClickListener(view -> {
             Intent intent = new Intent().setClass(this, LiveActivity.class);
+            startActivity(intent);
+        });
+        TextView btnPlay = binding.btnPlay;
+        btnPlay.setOnClickListener(view -> {
+            Intent intent = new Intent().setClass(this, PlayerActivity.class);
             startActivity(intent);
         });
     }

@@ -12,8 +12,10 @@
  */
 extern "C" JNIEXPORT void JNICALL
 Java_com_zyl_live_util_YuvUtil_NV21toI420andRotate(JNIEnv *env, jclass instance, jbyteArray input_,
-                                          jbyteArray output_, jint in_width, jint in_height,
-                                          jint rotation) {
+                                                   jbyteArray output_, jint in_width,
+                                                   jint in_height,
+                                                   jint rotation) {
+    int64_t *scs = 0;
     jbyte *srcData = env->GetByteArrayElements(input_, NULL);
     jbyte *dstData = env->GetByteArrayElements(output_, NULL);
     ////NV21转i420
@@ -57,7 +59,7 @@ Java_com_zyl_live_util_YuvUtil_NV21toI420andRotate(JNIEnv *env, jclass instance,
  */
 extern "C" JNIEXPORT void JNICALL
 Java_com_zyl_live_util_YuvUtil_NV21toI420(JNIEnv *env, jclass instance, jbyteArray input_,
-                                                   jbyteArray output_, jint in_width, jint in_height) {
+                                          jbyteArray output_, jint in_width, jint in_height) {
     jbyte *srcData = env->GetByteArrayElements(input_, NULL);
     jbyte *dstData = env->GetByteArrayElements(output_, NULL);
     ////NV21转i420

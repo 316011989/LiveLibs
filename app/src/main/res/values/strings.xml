@@ -9,4 +9,5 @@
     <string name="error_rtmp_connect_strem">RTMP连接流失败</string>
     <string name="error_rtmp_send_packet">RTMP发送数据包失败</string>
 
+    <string name="open_video_failed">Failed to open video url: %s !</string>
 </resources>

@@ -4,6 +4,14 @@
     <file url="file://$PROJECT_DIR$/live/src/main/cpp/ffplayer/adev.h" charset="GBK" />
     <file url="file://$PROJECT_DIR$/live/src/main/cpp/ffplayer/recorder.c" charset="GBK" />
     <file url="file://$PROJECT_DIR$/live/src/main/cpp/ffplayer/vdev-android.cpp" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/live/src/main/cpp/src/ffrender.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/live/src/main/cpp/player/adev-android.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/live/src/main/cpp/player/datarate.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/live/src/main/cpp/player/fanplayer_jni.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/live/src/main/cpp/player/ffrender.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/live/src/main/cpp/player/ffrender.c" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/live/src/main/cpp/player/pktqueue.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/live/src/main/cpp/player/pktqueue.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/live/src/main/cpp/player/snapshot.c" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/live/src/main/cpp/player/snapshot.h" charset="GBK" />
   </component>
 </project>
