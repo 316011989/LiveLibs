@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "LiveLibs"
 include ':app'
 include ':live'
+include ':player'

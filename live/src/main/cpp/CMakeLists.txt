@@ -3,11 +3,10 @@ cmake_minimum_required(VERSION 3.22.1)
 project("livelibs")
 
 include_directories(
-        include
-        player
-        avkcpdemuxer
-        ffrdpdemuxer
+        include/${CMAKE_ANDROID_ARCH_ABI}/
         )
+#include_directories(include/${CMAKE_ANDROID_ARCH_ABI}/polarssl/)
+#include_directories(include/${CMAKE_ANDROID_ARCH_ABI}/librtmp/)
 
 
 add_library(live STATIC
@@ -19,6 +18,8 @@ add_library(live STATIC
 add_library(yuv STATIC IMPORTED)
 set_target_properties(yuv PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libyuv.a)
 
+#add_library(pssl SHARED IMPORTED)
+#set_target_properties(pssl PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libpolarssl.a)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/rtmp)
 #add_library(rtmp SHARED IMPORTED)
@@ -31,31 +32,12 @@ set_target_properties(faac PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../.
 add_library(x264 STATIC IMPORTED)
 set_target_properties(x264 PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libx264.a)
 
-add_library(fanplayer STATIC
-        player/ffplayer.c
-        player/ffrender.c
-        player/pktqueue.c
-        player/snapshot.c
-        player/recorder.c
-        player/datarate.c
-        player/vdev-cmn.c
-        player/adev-android.cpp
-        player/vdev-android.cpp
-        player/fanplayer_jni.cpp
-        utils/GLUtils.cpp
-        avkcpdemuxer/ikcp.c
-        avkcpdemuxer/ringbuf.c
-        avkcpdemuxer/avkcpc.c
-        avkcpdemuxer/avkcpd.c
-        ffrdpdemuxer/ffrdp.c
-        ffrdpdemuxer/ffrdpc.c
-        ffrdpdemuxer/ffrdpd.c
-        )
+
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 find_library(log-lib log)
 
-target_link_libraries(live fanplayer yuv faac x264 rtmp
+target_link_libraries(live yuv faac x264 rtmp
 #        -landroid
 #        -ljnigraphics
         ${log-lib})

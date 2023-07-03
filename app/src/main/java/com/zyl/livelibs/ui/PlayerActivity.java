@@ -24,8 +24,8 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import com.zyl.live.player.MediaPlayer;
-import com.zyl.live.player.playerView;
+import com.rockcarry.fanplayer.MediaPlayer;
+import com.rockcarry.fanplayer.PlayerView;
 import com.zyl.livelibs.R;
 
 public class PlayerActivity extends Activity {
@@ -35,7 +35,7 @@ public class PlayerActivity extends Activity {
     //    private static final String DEF_PLAYER_OPEN_URL= "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
     private static final String DEF_PLAYER_OPEN_URL = "rtmp://192.168.10.200:1935/live/android";
     private MediaPlayer mPlayer = null;
-    private playerView mRoot = null;
+    private PlayerView mRoot = null;
     private SurfaceView mVideo = null;
     private SeekBar mSeek = null;
     private ProgressBar mBuffering = null;
@@ -108,8 +108,8 @@ public class PlayerActivity extends Activity {
             dlg.show();
         }
 
-        mRoot = (playerView) findViewById(R.id.player_root);
-        mRoot.setOnSizeChangedListener(new playerView.OnSizeChangedListener() {
+        mRoot = (PlayerView) findViewById(R.id.player_root);
+        mRoot.setOnSizeChangedListener(new PlayerView.OnSizeChangedListener() {
             @Override
             public void onSizeChanged(int w, int h, int oldw, int oldh) {
                 mVideo.setVisibility(View.INVISIBLE);
