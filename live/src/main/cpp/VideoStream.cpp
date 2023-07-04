@@ -61,7 +61,8 @@ int VideoStream::setVideoEncInfo(int width, int height, int fps, int bitrate) {
     //thread number
     param.i_threads = 1;
 
-    ret = x264_param_apply_profile(&param, "baseline");
+//    ret = x264_param_apply_profile(&param, "baseline");
+    ret = x264_param_apply_profile(&param, "high");
     if (ret < 0) {
         return ret;
     }

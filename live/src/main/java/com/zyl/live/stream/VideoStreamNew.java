@@ -125,7 +125,6 @@ public class VideoStreamNew extends VideoStreamBase
 
     @Override
     public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-
     }
 
     /**
@@ -178,14 +177,16 @@ public class VideoStreamNew extends VideoStreamBase
     }
 
     private void updateVideoCodecInfo(int degree) {
-        camera2Helper.updatePreviewDegree(degree);
-        if (mCallback != null && mVideoParam != null) {
-            int width = previewSize.getWidth();
-            int height = previewSize.getHeight();
-            if (degree == 90 || degree == 270) {
-                mCallback.onVideoCodecInfo(height, width, mVideoParam.getFrameRate(), mVideoParam.getBitRate());
-            } else
-                mCallback.onVideoCodecInfo(width, height, mVideoParam.getFrameRate(), mVideoParam.getBitRate());
+        if (camera2Helper != null) {//横屏进入项目时,camera2Helper还没有build
+            camera2Helper.updatePreviewDegree(degree);
+            if (mCallback != null && mVideoParam != null) {
+                int width = previewSize.getWidth();
+                int height = previewSize.getHeight();
+                if (degree == 90 || degree == 270) {
+                    mCallback.onVideoCodecInfo(height, width, mVideoParam.getFrameRate(), mVideoParam.getBitRate());
+                } else
+                    mCallback.onVideoCodecInfo(width, height, mVideoParam.getFrameRate(), mVideoParam.getBitRate());
+            }
         }
     }
 

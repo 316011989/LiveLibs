@@ -7,7 +7,7 @@
 
     <TextureView
         android:id="@+id/surface_camera"
-        android:layout_width="192dp"
+        android:layout_width="144dp"
         android:layout_height="256dp" />
 
     <Button

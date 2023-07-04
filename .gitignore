@@ -12,6 +12,7 @@
 /app/release
 /app/build
 /live/build
+/player/build
 /captures
 .externalNativeBuild
 .cxx

@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
@@ -68,7 +70,7 @@ public class LiveActivity extends BaseActivity implements View.OnClickListener, 
         int width = 640;
         int height = 480;
         int videoBitRate = 800000;// kb/s
-        int videoFrameRate = 10;// fps
+        int videoFrameRate = 30;// fps
         VideoParam videoParam = new VideoParam(width, height, Integer.parseInt(Camera2Helper.CAMERA_ID_FRONT)
                 , videoBitRate, videoFrameRate);
         int sampleRate = 44100;

@@ -475,6 +475,7 @@ public class Camera2Helper {
         mTextureView.setTransform(matrix);
     }
 
+
     public static final class Builder {
 
         private TextureView previewDisplayView;
@@ -581,28 +582,28 @@ public class Camera2Helper {
                     }
                     offset += len / 4;
                 }
-
-                if (dstData == null) {
-                    dstData = new byte[len * 3 / 2];
-                }
                 if (rotateDegree == 90) {
+                    dstData = new byte[len * 3 / 2];
                     YuvUtil.NV21toI420andRotate(yuvData, dstData, width, height, 270);
                     yuvData = dstData;
                     dstData = new byte[len * 3 / 2];
                     YuvUtil.I420Mirror(yuvData, dstData, height, width);
                 } else if (rotateDegree == 270) {
+                    dstData = new byte[len * 3 / 2];
                     YuvUtil.NV21toI420andRotate(yuvData, dstData, width, height, 90);
                     yuvData = dstData;
                     dstData = new byte[len * 3 / 2];
                     YuvUtil.I420Mirror(yuvData, dstData, height, width);
-                    Log.e("John rotate", "角度90,宽" + width + "高" + height);
-                } else if (rotateDegree == 180) {
-//                    YuvUtil.NV21toI420(yuvData, dstData, width, height);
-                    YuvUtil.NV21toI420andRotate(yuvData, dstData, width, height, 180);
-                    Log.e("John rotate", "角度180,宽" + width + "高" + height);
                 } else if (rotateDegree == 0) {
-//                    YuvUtil.NV21toI420(yuvData, dstData, width, height);
-                    Log.e("John rotate", "角度0,宽" + width + "高" + height);
+                    dstData = new byte[len * 3 / 2];
+                    YuvUtil.I420Mirror(yuvData, dstData, width, height);
+                } else if (rotateDegree == 180) {
+                    dstData = new byte[len * 3 / 2];
+                    YuvUtil.I420Mirror(yuvData, dstData, width, height);
+
+                    yuvData = dstData;
+                    dstData = new byte[len * 3 / 2];
+                    YuvUtil.Rotate(yuvData, dstData, width, height, 180);
                 }
                 if (camera2Listener != null) {
                     camera2Listener.onPreviewFrame(dstData);
