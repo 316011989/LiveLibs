@@ -88,7 +88,7 @@ void *start(void *args) {
         //start pushing
         isPushing = true;
         packets.setRunning(true);
-//        callback(audioStream->getAudioTag());
+        callback(audioStream->getAudioTag());
         RTMPPacket *packet = nullptr;
         while (isPushing) {
             packets.pop(packet);

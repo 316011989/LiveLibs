@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class LiveActivity extends BaseActivity implements View.OnClickListener, 
         super.onCreate(savedInstanceState);
         binding = ActivityLiveBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         initView();
         initPusher();
         registerBroadcast(this);
@@ -54,6 +56,7 @@ public class LiveActivity extends BaseActivity implements View.OnClickListener, 
                 }
         );
     }
+
 
     private void initView() {
         binding.btnSwap.setOnClickListener(this);
@@ -126,7 +129,7 @@ public class LiveActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     @Override
-    public void  onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         orientationHandler.disable();
         if (livePusher != null) {

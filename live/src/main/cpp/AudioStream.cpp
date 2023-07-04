@@ -26,6 +26,10 @@ int AudioStream::setAudioEncInfo(int samplesInHZ, int channels) {
     config->aacObjectType = LOW;
     config->inputFormat = FAAC_INPUT_16BIT;
     config->outputFormat = 0;
+
+    config->useTns = 0;
+    config->useLfe = 0;
+
     return faacEncSetConfiguration(m_audioCodec, config);
 }
 
