@@ -1,4 +1,4 @@
-com.rockcarry.fanplayer
+com.zhtj.plugin.im.liveplayer
 drawable ic_launcher
 drawable ic_launcher_black
 drawable ic_launcher_red

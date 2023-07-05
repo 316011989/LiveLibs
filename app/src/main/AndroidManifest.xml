@@ -33,10 +33,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.zyl.livelibs.ui.LiveActivity"
+            android:name="com.zhtj.plugin.im.ui.LiveActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="com.zyl.livelibs.ui.PlayerActivity"
+            android:name="com.zhtj.plugin.im.ui.PlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:launchMode="singleTask">

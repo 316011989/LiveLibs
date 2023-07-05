@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <com.rockcarry.fanplayer.PlayerView
+    <com.zhtj.plugin.im.liveplayer.PlayerView
         android:id="@+id/player_root"
         android:layout_width="fill_parent"
         android:background="@color/black"
@@ -36,7 +36,7 @@
             android:src="@drawable/icn_media_pause"
             android:alpha="0.8"
             />
-    </com.rockcarry.fanplayer.PlayerView>
+    </com.zhtj.plugin.im.liveplayer.PlayerView>
 
 </RelativeLayout>
 

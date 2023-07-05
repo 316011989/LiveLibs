@@ -11,7 +11,7 @@
  * NV21 -> I420
  */
 extern "C" JNIEXPORT void JNICALL
-Java_com_zyl_live_util_YuvUtil_NV21toI420andRotate(JNIEnv *env, jclass instance, jbyteArray input_,
+Java_com_zhtj_plugin_im_live_util_YuvUtil_NV21toI420andRotate(JNIEnv *env, jclass instance, jbyteArray input_,
                                                    jbyteArray output_, jint in_width,
                                                    jint in_height,
                                                    jint rotation) {
@@ -58,7 +58,7 @@ Java_com_zyl_live_util_YuvUtil_NV21toI420andRotate(JNIEnv *env, jclass instance,
  * NV21 -> I420
  */
 extern "C" JNIEXPORT void JNICALL
-Java_com_zyl_live_util_YuvUtil_NV21toI420(JNIEnv *env, jclass instance, jbyteArray input_,
+Java_com_zhtj_plugin_im_live_util_YuvUtil_NV21toI420(JNIEnv *env, jclass instance, jbyteArray input_,
                                           jbyteArray output_, jint in_width, jint in_height) {
     jbyte *srcData = env->GetByteArrayElements(input_, NULL);
     jbyte *dstData = env->GetByteArrayElements(output_, NULL);
@@ -79,7 +79,7 @@ Java_com_zyl_live_util_YuvUtil_NV21toI420(JNIEnv *env, jclass instance, jbyteArr
  * 镜像翻转
  */
 extern "C" JNIEXPORT void JNICALL
-Java_com_zyl_live_util_YuvUtil_I420Mirror(JNIEnv *env, jclass instance, jbyteArray input_,
+Java_com_zhtj_plugin_im_live_util_YuvUtil_I420Mirror(JNIEnv *env, jclass instance, jbyteArray input_,
                                           jbyteArray output_, jint in_width, jint in_height) {
     jbyte *srcData = env->GetByteArrayElements(input_, NULL);
     jbyte *dstData = env->GetByteArrayElements(output_, NULL);
@@ -112,7 +112,7 @@ Java_com_zyl_live_util_YuvUtil_I420Mirror(JNIEnv *env, jclass instance, jbyteArr
  * NV21 -> I420
  */
 extern "C" JNIEXPORT void JNICALL
-Java_com_zyl_live_util_YuvUtil_Rotate(JNIEnv *env, jclass instance, jbyteArray input_,
+Java_com_zhtj_plugin_im_live_util_YuvUtil_Rotate(JNIEnv *env, jclass instance, jbyteArray input_,
                                                    jbyteArray output_, jint in_width,
                                                    jint in_height,
                                                    jint rotation) {

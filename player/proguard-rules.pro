@@ -1,5 +1,5 @@
 
--keep class com.rockcarry.fanplayer.player {
+-keep class com.zhtj.fanplayer.player {
   private void internalPlayerEventCallback(int, long);
 }
 

@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.zyl.live'
+    namespace 'com.zhtj.plugin.im.live'
     compileSdk 33
 
     defaultConfig {

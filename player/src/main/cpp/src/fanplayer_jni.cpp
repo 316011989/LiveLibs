@@ -145,7 +145,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
         return -1;
     }
 
-    jclass cls = env->FindClass("com/rockcarry/fanplayer/MediaPlayer");
+    jclass cls = env->FindClass("com/zhtj/plugin/im/liveplayer/MediaPlayer");
     int ret = env->RegisterNatives(cls, g_methods, sizeof(g_methods)/sizeof(g_methods[0]));
     if (ret != JNI_OK) {
         __android_log_print(ANDROID_LOG_ERROR, "fanplayer_jni", "ERROR: failed to register native methods !\n");

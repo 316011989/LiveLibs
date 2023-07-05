@@ -4,7 +4,7 @@
     "type": "PACKAGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "com.rockcarry.fanplayer",
+  "applicationId": "com.zhtj.plugin.im.liveplayer",
   "variantName": "debug",
   "elements": [
     {
