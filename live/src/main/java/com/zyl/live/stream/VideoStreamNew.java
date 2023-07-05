@@ -182,6 +182,7 @@ public class VideoStreamNew extends VideoStreamBase
             if (mCallback != null && mVideoParam != null) {
                 int width = previewSize.getWidth();
                 int height = previewSize.getHeight();
+                Log.i("john VideoCodecInfo", "width=" + width + ";height=" + height);
                 if (degree == 90 || degree == 270) {
                     mCallback.onVideoCodecInfo(height, width, mVideoParam.getFrameRate(), mVideoParam.getBitRate());
                 } else

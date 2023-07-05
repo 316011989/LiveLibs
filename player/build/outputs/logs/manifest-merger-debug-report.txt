@@ -1,8 +1,8 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:2:1-63:12
-INJECTED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:2:1-63:12
-INJECTED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:2:1-63:12
+ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:2:1-14:12
+INJECTED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:2:1-14:12
+INJECTED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:2:1-14:12
 	package
 		ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:3:5-38
 		INJECTED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml
@@ -25,44 +25,6 @@ uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:10:5-81
 	android:name
 		ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:10:22-78
-application
-ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:12:5-61:19
-activity#com.rockcarry.fanplayer.MainActivity
-ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:13:9-60:20
-	android:label
-		ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:15:13-45
-	android:launchMode
-		ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:16:13-44
-	android:exported
-		ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:17:13-36
-	android:configChanges
-		ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:18:13-74
-	android:name
-		ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:14:13-41
-intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:rtmp+data:scheme:rtsp
-ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:23:13-29:29
-action#android.intent.action.VIEW
-ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:24:17-69
-	android:name
-		ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:24:25-66
-category#android.intent.category.DEFAULT
-ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:25:17-76
-	android:name
-		ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:25:27-73
-category#android.intent.category.BROWSABLE
-ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:26:17-78
-	android:name
-		ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:26:27-75
-data
-ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:17-47
-	android:scheme
-		ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:27:23-44
-	android:mimeType
-		ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:38:23-53
-intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:mimeType:application/sdp+data:mimeType:audio/*+data:mimeType:video/3gp+data:mimeType:video/3gpp+data:mimeType:video/3gpp2+data:mimeType:video/avi+data:mimeType:video/mp4+data:mimeType:video/mpeg4+data:mimeType:video/rmvb+data:mimeType:video/webm+data:scheme:content+data:scheme:file+data:scheme:http+data:scheme:https
-ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:30:13-48:29
-intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:mimeType:application/vnd.apple.mpegurl+data:mimeType:application/x-mpegurl+data:mimeType:audio/mpegurl+data:mimeType:audio/x-mpegurl+data:scheme:http+data:scheme:https
-ADDED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:49:13-59:29
 uses-sdk
 INJECTED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml

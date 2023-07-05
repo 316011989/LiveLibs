@@ -3,7 +3,6 @@ package com.zyl.livelibs.ui;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -12,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.rockcarry.fanplayer.MediaPlayer;
 import com.rockcarry.fanplayer.PlayerView;
+import com.zyl.livelibs.Constans;
 import com.zyl.livelibs.R;
 
 public class PlayerActivity extends Activity {
@@ -33,7 +34,6 @@ public class PlayerActivity extends Activity {
     private static final String PLAYER_SHARED_PREFS = "fanplayer_shared_prefs";
     private static final String KEY_PLAYER_OPEN_URL = "key_player_open_url";
     //    private static final String DEF_PLAYER_OPEN_URL= "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
-    private static final String DEF_PLAYER_OPEN_URL = "rtmp://192.168.10.200:1935/live/android";
     private MediaPlayer mPlayer = null;
     private PlayerView mRoot = null;
     private SurfaceView mVideo = null;
@@ -87,36 +87,25 @@ public class PlayerActivity extends Activity {
             edt.setSingleLine(true);
             edt.setText(mURL);
             builder.setView(edt);
-            builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    PlayerActivity.this.finish();
-                }
-            });
-            builder.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mURL = edt.getText().toString();
-                    savePlayerOpenURL(mURL);
-                    mIsLive = mURL.startsWith("http://") && mURL.endsWith(".m3u8") || mURL.startsWith("rtmp://") || mURL.startsWith("rtsp://") || mURL.startsWith("avkcp://") || mURL.startsWith("ffrdp://");
-                    mPlayer = new MediaPlayer(mURL, mHandler, PLAYER_INIT_PARAMS);
-                    mPlayer.setDisplaySurface(mVideoSurface);
-                    testPlayerPlay(true);
-                }
+            builder.setNegativeButton("cancel", (dialog, which) -> PlayerActivity.this.finish());
+            builder.setPositiveButton("confirm", (dialog, which) -> {
+                mURL = edt.getText().toString();
+                savePlayerOpenURL(mURL);
+                mIsLive = mURL.startsWith("http://") && mURL.endsWith(".m3u8") || mURL.startsWith("rtmp://") || mURL.startsWith("rtsp://") || mURL.startsWith("avkcp://") || mURL.startsWith("ffrdp://");
+                mPlayer = new MediaPlayer(mURL, mHandler, PLAYER_INIT_PARAMS);
+                mPlayer.setDisplaySurface(mVideoSurface);
+                testPlayerPlay(true);
             });
             AlertDialog dlg = builder.create();
             dlg.show();
         }
 
         mRoot = (PlayerView) findViewById(R.id.player_root);
-        mRoot.setOnSizeChangedListener(new PlayerView.OnSizeChangedListener() {
-            @Override
-            public void onSizeChanged(int w, int h, int oldw, int oldh) {
-                mVideo.setVisibility(View.INVISIBLE);
-                mVideoViewW = w;
-                mVideoViewH = h;
-                mHandler.sendEmptyMessage(MSG_UDPATE_VIEW_SIZE);
-            }
+        mRoot.setOnSizeChangedListener((w, h, oldw, oldh) -> {
+            mVideo.setVisibility(View.INVISIBLE);
+            mVideoViewW = w;
+            mVideoViewH = h;
+            mHandler.sendEmptyMessage(MSG_UDPATE_VIEW_SIZE);
         });
 
         mVideo = (SurfaceView) findViewById(R.id.video_view);
@@ -160,12 +149,7 @@ public class PlayerActivity extends Activity {
         });
 
         mPause = (ImageView) findViewById(R.id.btn_playpause);
-        mPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                testPlayerPlay(!mIsPlaying);
-            }
-        });
+        mPause.setOnClickListener(v -> testPlayerPlay(!mIsPlaying));
 
         mBuffering = (ProgressBar) findViewById(R.id.buffering);
         mBuffering.setVisibility(mIsLive ? View.VISIBLE : View.INVISIBLE);
@@ -239,6 +223,7 @@ public class PlayerActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_UPDATE_PROGRESS: {
+                    Log.e("john Playeractivity", "handleMessage: MSG_UPDATE_PROGRESS" );
                     mHandler.sendEmptyMessageDelayed(MSG_UPDATE_PROGRESS, 200);
                     int progress = mPlayer != null ? (int) mPlayer.getParam(MediaPlayer.PARAM_MEDIA_POSITION) : 0;
                     if (!mIsLive) {
@@ -288,7 +273,7 @@ public class PlayerActivity extends Activity {
     };
 
     private String readPlayerOpenURL() {
-        return mSharedPrefs.getString(KEY_PLAYER_OPEN_URL, DEF_PLAYER_OPEN_URL);
+        return mSharedPrefs.getString(KEY_PLAYER_OPEN_URL, Constans.PLAY_URL);
     }
 
     private void savePlayerOpenURL(String url) {

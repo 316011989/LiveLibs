@@ -28,13 +28,13 @@ import com.zyl.live.param.AudioParam;
 import com.zyl.live.param.VideoParam;
 import com.zyl.live.stream.LivePusherNew;
 import com.zyl.livelibs.BaseActivity;
+import com.zyl.livelibs.Constans;
 import com.zyl.livelibs.R;
 import com.zyl.livelibs.databinding.ActivityLiveBinding;
 
 public class LiveActivity extends BaseActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, OnNetworkChangeListener, LiveStateChangeListener {
     private final String TAG = LiveActivity.class.getSimpleName();
     private final int MSG_ERROR = 100;
-    private final String LIVE_URL = "rtmp://192.168.10.200:1935/live/android";
     private ActivityLiveBinding binding;
     private OrientationHandler orientationHandler = null;
     private LivePusherNew livePusher = null;
@@ -94,7 +94,7 @@ public class LiveActivity extends BaseActivity implements View.OnClickListener, 
         switch (compoundButton.getId()) {
             case R.id.btn_live://start or stop living
                 if (isChecked) {
-                    livePusher.startPush(LIVE_URL, this);
+                    livePusher.startPush(Constans.LIVE_URL, this);
                     isPushing = true;
                 } else {
                     livePusher.stopPush();
