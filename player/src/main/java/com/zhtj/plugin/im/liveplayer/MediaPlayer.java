@@ -28,13 +28,11 @@ public final class MediaPlayer {
     public static final int PARAM_AVSYNC_TIME_DIFF = 0x1000 + 8;
 //  public static final int PARAM_PLAYER_CALLBACK   = 0x1000 + 9;
 
-    public MediaPlayer() {
+
+    public MediaPlayer(Handler h) {
+        mPlayerMsgHandler = h;
     }
 
-    public MediaPlayer(String url, Handler h, String params) {
-        mPlayerMsgHandler = h;
-        open(url, params);
-    }
 
     protected void finalize() {
         close();
@@ -90,13 +88,15 @@ public final class MediaPlayer {
 
         int sw, sh; // scale width & height
         if (rw * vh < vw * rh) {
-            sw = rw; sh = sw * vh / vw;
+            sw = rw;
+            sh = sw * vh / vw;
         } else {
-            sh = rh; sw = sh * vw / vh;
+            sh = rh;
+            sw = sh * vw / vh;
         }
 
         ViewGroup.LayoutParams lp = v.getLayoutParams();
-        lp.width  = sw;
+        lp.width = sw;
         lp.height = sh;
         v.setLayoutParams(lp);
         return true;
@@ -117,7 +117,7 @@ public final class MediaPlayer {
 
     private long m_hPlayer = 0;
 
-    private native long nativeOpen(String url, Object surface, int w, int h, String params);
+    public native long nativeOpen(String url, Object surface, int w, int h, String params);
 
     private native void nativeClose(long hplayer);
 

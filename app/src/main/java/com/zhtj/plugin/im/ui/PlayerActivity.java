@@ -35,7 +35,6 @@ public class PlayerActivity extends Activity {
     private static final String KEY_PLAYER_OPEN_URL = "key_player_open_url";
     //    private static final String DEF_PLAYER_OPEN_URL= "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
     private MediaPlayer mPlayer = null;
-    private PlayerView mRoot = null;
     private SurfaceView mVideo = null;
     private SeekBar mSeek = null;
     private ProgressBar mBuffering = null;
@@ -77,7 +76,8 @@ public class PlayerActivity extends Activity {
                 mURL = cursor.getString(colidx);
             }
             mIsLive = mURL.startsWith("http://") && mURL.endsWith(".m3u8") || mURL.startsWith("rtmp://") || mURL.startsWith("rtsp://") || mURL.startsWith("avkcp://") || mURL.startsWith("ffrdp://");
-            mPlayer = new MediaPlayer(mURL, mHandler, PLAYER_INIT_PARAMS);
+            mPlayer = new MediaPlayer(mHandler);
+            mPlayer.open(mURL, PLAYER_INIT_PARAMS);
         } else {
             mURL = readPlayerOpenURL();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -92,7 +92,8 @@ public class PlayerActivity extends Activity {
                 mURL = edt.getText().toString();
                 savePlayerOpenURL(mURL);
                 mIsLive = mURL.startsWith("http://") && mURL.endsWith(".m3u8") || mURL.startsWith("rtmp://") || mURL.startsWith("rtsp://") || mURL.startsWith("avkcp://") || mURL.startsWith("ffrdp://");
-                mPlayer = new MediaPlayer(mURL, mHandler, PLAYER_INIT_PARAMS);
+                mPlayer = new MediaPlayer(mHandler);
+                mPlayer.open(mURL, PLAYER_INIT_PARAMS);
                 mPlayer.setDisplaySurface(mVideoSurface);
                 testPlayerPlay(true);
             });
@@ -100,7 +101,7 @@ public class PlayerActivity extends Activity {
             dlg.show();
         }
 
-        mRoot = (PlayerView) findViewById(R.id.player_root);
+        PlayerView mRoot = (PlayerView) findViewById(R.id.player_root);
         mRoot.setOnSizeChangedListener((w, h, oldw, oldh) -> {
             mVideo.setVisibility(View.INVISIBLE);
             mVideoViewW = w;
@@ -223,10 +224,11 @@ public class PlayerActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_UPDATE_PROGRESS: {
-                    Log.e("john Playeractivity", "handleMessage: MSG_UPDATE_PROGRESS" );
+                    Log.e("john Playeractivity", "handleMessage: MSG_UPDATE_PROGRESS");
                     mHandler.sendEmptyMessageDelayed(MSG_UPDATE_PROGRESS, 200);
                     int progress = mPlayer != null ? (int) mPlayer.getParam(MediaPlayer.PARAM_MEDIA_POSITION) : 0;
                     if (!mIsLive) {
+
                         if (progress >= 0) mSeek.setProgress(progress);
                     } else {
                         mBuffering.setVisibility(progress == -1 ? View.VISIBLE : View.INVISIBLE);

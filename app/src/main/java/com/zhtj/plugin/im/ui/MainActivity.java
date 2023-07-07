@@ -42,7 +42,8 @@ public class MainActivity extends BaseActivity {
         });
         TextView btnPlay = binding.btnPlay;
         btnPlay.setOnClickListener(view -> {
-            Intent intent = new Intent().setClass(this, PlayerActivity.class);
+//            Intent intent = new Intent().setClass(this, PlayerActivity.class);
+            Intent intent = new Intent().setClass(this, NewPlayerActivity.class);
             startActivity(intent);
         });
     }

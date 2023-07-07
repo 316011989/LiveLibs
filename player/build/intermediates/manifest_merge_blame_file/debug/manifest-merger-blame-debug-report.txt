@@ -6,18 +6,18 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
-8-->D:\liushu\LiveLibs\player\src\main\AndroidManifest.xml
+8-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="33" />
-9-->D:\liushu\LiveLibs\player\src\main\AndroidManifest.xml
+9-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->D:\liushu\LiveLibs\player\src\main\AndroidManifest.xml:7:5-67
-11-->D:\liushu\LiveLibs\player\src\main\AndroidManifest.xml:7:22-64
+11-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:7:5-67
+11-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:7:22-64
 12    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
-12-->D:\liushu\LiveLibs\player\src\main\AndroidManifest.xml:8:5-78
-12-->D:\liushu\LiveLibs\player\src\main\AndroidManifest.xml:8:22-75
+12-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:8:5-78
+12-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:8:22-75
 13    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-13-->D:\liushu\LiveLibs\player\src\main\AndroidManifest.xml:9:5-81
-13-->D:\liushu\LiveLibs\player\src\main\AndroidManifest.xml:9:22-78
+13-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:9:5-81
+13-->E:\workspace\LiveLibs\player\src\main\AndroidManifest.xml:9:22-78
 14
 15</manifest>
