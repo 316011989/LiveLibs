@@ -30,7 +30,7 @@ import com.zhtj.plugin.im.liveplayer.PlayerView;
 import com.zhtj.plugin.im.Constans;
 
 public class PlayerActivity extends Activity {
-    private static final String PLAYER_INIT_PARAMS = "video_hwaccel=1;init_timeout=2000;auto_reconnect=2000;audio_bufpktn=4;video_bufpktn=1;rtsp_transport=2;";
+    private static final String PLAYER_INIT_PARAMS = "video_hwaccel=1;init_timeout=2000;auto_reconnect=2000;audio_bufpktn=8;video_bufpktn=2;rtsp_transport=2;";
     private static final String PLAYER_SHARED_PREFS = "fanplayer_shared_prefs";
     private static final String KEY_PLAYER_OPEN_URL = "key_player_open_url";
     //    private static final String DEF_PLAYER_OPEN_URL= "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";

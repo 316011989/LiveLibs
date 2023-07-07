@@ -20,8 +20,11 @@ import com.zhtj.plugin.im.databinding.ActivityNewplayerBinding;
 import com.zhtj.plugin.im.liveplayer.MediaPlayer;
 import com.zhtj.plugin.im.liveplayer.PlayerView;
 
+/**
+ * 相对playeractivity做了简化,没有UI,没有本地视频播放和控制
+ */
 public class NewPlayerActivity extends BaseActivity {
-    private static final String PLAYER_INIT_PARAMS = "video_hwaccel=0;init_timeout=2000;auto_reconnect=2000;audio_bufpktn=20;video_bufpktn=5;rtsp_transport=2;";
+    private static final String PLAYER_INIT_PARAMS = "video_hwaccel=0;init_timeout=2000;auto_reconnect=2000;audio_bufpktn=200;video_bufpktn=50;rtsp_transport=2;";
     private MediaPlayer mPlayer = null;
     private SurfaceView mVideo = null;
     private Surface mVideoSurface;
@@ -133,7 +136,6 @@ public class NewPlayerActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_UPDATE_PROGRESS: {
-                    Log.e("john Playeractivity", "handleMessage: MSG_UPDATE_PROGRESS");
                     mHandler.sendEmptyMessageDelayed(MSG_UPDATE_PROGRESS, 200);
                     int progress = mPlayer != null ? (int) mPlayer.getParam(MediaPlayer.PARAM_MEDIA_POSITION) : 0;
                 }

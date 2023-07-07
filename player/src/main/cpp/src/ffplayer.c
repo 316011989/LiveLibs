@@ -25,6 +25,7 @@
 #ifdef ANDROID
 
 #include "fanplayer_jni.h"
+#include "LogUtil.h"
 
 #endif
 
@@ -758,6 +759,7 @@ static void *video_decode_thread_proc(void *param) {
                 av_log(NULL, AV_LOG_WARNING, "an error occurred during decoding video.\n");
                 break;
             }
+
             if (player->vcodec_context->width != player->init_params.video_vwidth ||
                 player->vcodec_context->height != player->init_params.video_vheight) {
                 player->init_params.video_vwidth = player->init_params.video_owidth = player->vcodec_context->width;
@@ -770,7 +772,32 @@ static void *video_decode_thread_proc(void *param) {
             if (gotvideo) {
                 player->vframe.height = player->vcodec_context->height; // when using dxva2 hardware hwaccel, the frame heigh may incorrect, so we need fix it
                 vfilter_graph_input(player, &player->vframe);
-                do {
+                ////先do在手机旋转或者切换直播流的时候会崩溃,直接while不崩溃,但是不知道会不会影响别的,比如第一帧的加载,先配合本次提交的缓冲参数
+//                do {
+//                    if (vfilter_graph_output(player, &player->vframe) < 0) break;
+//                    player->seek_vpts = av_frame_get_best_effort_timestamp(&player->vframe);
+////                  player->seek_vpts = player->vframe.pkt_dts; // if rtmp has problem, try to use this code
+//                    player->vframe.pts = av_rescale_q(player->seek_vpts, player->vstream_timebase,
+//                                                      TIMEBASE_MS);
+//                    //++ for seek operation
+//                    if (player->status & PS_V_SEEK) {
+//                        if (player->seek_dest - player->vframe.pts <= player->seek_diff) {
+//                            player->cmnvars.start_tick = av_gettime_relative() / 1000;
+//                            player->cmnvars.start_pts = player->vframe.pts;
+//                            player->cmnvars.vpts = player->vframe.pts;
+//                            player->cmnvars.apts =
+//                                    player->astream_index == -1 ? -1 : player->seek_dest;
+//                            player->status &= ~PS_V_SEEK;
+//                            if (player->status & PS_R_PAUSE) {
+//                                render_pause(player->render, 1);
+//                            }
+//                        }
+//                    }
+//                    //-- for seek operation
+//                    if (!(player->status & PS_V_SEEK))
+//                        render_video(player->render, &player->vframe);
+//                } while (player->vfilter_graph);
+                while (player->vfilter_graph) {
                     if (vfilter_graph_output(player, &player->vframe) < 0) break;
                     player->seek_vpts = av_frame_get_best_effort_timestamp(&player->vframe);
 //                  player->seek_vpts = player->vframe.pkt_dts; // if rtmp has problem, try to use this code
@@ -793,7 +820,7 @@ static void *video_decode_thread_proc(void *param) {
                     //-- for seek operation
                     if (!(player->status & PS_V_SEEK))
                         render_video(player->render, &player->vframe);
-                } while (player->vfilter_graph);
+                }
             }
 
             packet->data += packet->size;
