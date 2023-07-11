@@ -182,7 +182,6 @@ void vdev_getparam(void *ctxt, int id, void *param)
 
 void vdev_avsync_and_complete(void *ctxt)
 {
-    LOGCATI("vdev_avsync_and_complete");
     VDEV_COMMON_CTXT *c = (VDEV_COMMON_CTXT*)ctxt;
     int     tickframe, tickdiff, scdiff, avdiff = -1;
     int64_t tickcur, sysclock;
@@ -212,10 +211,7 @@ void vdev_avsync_and_complete(void *ctxt)
         avdiff  = (int)(c->cmnvars->apts  - c->cmnvars->vpts - c->tickavdiff); // diff between audio and video pts
         avdiff  = c->cmnvars->apts <= 0 ? scdiff : avdiff; // if apts is invalid, sync video to system clock
 
-        LOGCATI("vdev_avsync_and_complete speed=%d, c->tickframe=%d, sysclock=%ld", c->speed, c->tickframe, sysclock);
-        LOGCATI("vdev_avsync_and_complete speed=%d, c->tickframe=%d, sysclock=%ld", c->speed, c->tickframe, sysclock);
 
-        //tickdiff��������Ⱦ��ʵ�ʼ�� ��tickframe ����֡�ʼ���������ϵ���Ⱦ���
         if (tickdiff - tickframe >  5) c->ticksleep--;
         if (tickdiff - tickframe < -5) c->ticksleep++;
         if (c->cmnvars->vpts >= 0) {
@@ -227,7 +223,6 @@ void vdev_avsync_and_complete(void *ctxt)
             else if (avdiff < -30 ) c->ticksleep += 1;
         }
         if (c->ticksleep < 0) c->ticksleep = 0;
-        LOGCATI("vdev_avsync_and_complete tickdiff=%d, tickframe=%d, c->ticksleep=%d", tickdiff, tickframe, c->ticksleep);
         //-- frame rate & av sync control --//
     } else {
         c->ticksleep = c->tickframe;

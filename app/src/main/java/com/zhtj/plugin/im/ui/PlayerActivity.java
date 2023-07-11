@@ -30,7 +30,6 @@ import com.zhtj.plugin.im.liveplayer.PlayerView;
 import com.zhtj.plugin.im.Constans;
 
 public class PlayerActivity extends Activity {
-    private static final String PLAYER_INIT_PARAMS = "video_hwaccel=1;init_timeout=2000;auto_reconnect=2000;audio_bufpktn=8;video_bufpktn=2;rtsp_transport=2;";
     private static final String PLAYER_SHARED_PREFS = "fanplayer_shared_prefs";
     private static final String KEY_PLAYER_OPEN_URL = "key_player_open_url";
     //    private static final String DEF_PLAYER_OPEN_URL= "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
@@ -56,50 +55,25 @@ public class PlayerActivity extends Activity {
         setContentView(R.layout.activity_player);
         mSharedPrefs = getSharedPreferences(PLAYER_SHARED_PREFS, Context.MODE_PRIVATE);
 
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        if (intent.ACTION_VIEW.equals(action)) {
-            Uri uri = (Uri) intent.getData();
-            String scheme = uri.getScheme();
-            if (scheme.equals("file")) {
-                mURL = uri.getPath();
-            } else if (scheme.equals("http")
-                    || scheme.equals("https")
-                    || scheme.equals("rtsp")
-                    || scheme.equals("rtmp")) {
-                mURL = uri.toString();
-            } else if (scheme.equals("content")) {
-                String[] proj = {MediaStore.Images.Media.DATA};
-                Cursor cursor = managedQuery(uri, proj, null, null, null);
-                int colidx = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                cursor.moveToFirst();
-                mURL = cursor.getString(colidx);
-            }
-            mIsLive = mURL.startsWith("http://") && mURL.endsWith(".m3u8") || mURL.startsWith("rtmp://") || mURL.startsWith("rtsp://") || mURL.startsWith("avkcp://") || mURL.startsWith("ffrdp://");
-            mPlayer = new MediaPlayer(mHandler);
-            mPlayer.open(mURL, PLAYER_INIT_PARAMS);
-        } else {
-            mURL = readPlayerOpenURL();
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("open url:");
-            final EditText edt = new EditText(this);
-            edt.setHint("url:");
-            edt.setSingleLine(true);
-            edt.setText(mURL);
-            builder.setView(edt);
-            builder.setNegativeButton("cancel", (dialog, which) -> PlayerActivity.this.finish());
-            builder.setPositiveButton("confirm", (dialog, which) -> {
-                mURL = edt.getText().toString();
-                savePlayerOpenURL(mURL);
-                mIsLive = mURL.startsWith("http://") && mURL.endsWith(".m3u8") || mURL.startsWith("rtmp://") || mURL.startsWith("rtsp://") || mURL.startsWith("avkcp://") || mURL.startsWith("ffrdp://");
-                mPlayer = new MediaPlayer(mHandler);
-                mPlayer.open(mURL, PLAYER_INIT_PARAMS);
-                mPlayer.setDisplaySurface(mVideoSurface);
-                testPlayerPlay(true);
-            });
-            AlertDialog dlg = builder.create();
-            dlg.show();
+        Uri uri = Uri.parse(Constans.PLAY_URL);
+        String scheme = uri.getScheme();
+        if (scheme.equals("file")) {
+            mURL = uri.getPath();
+        } else if (scheme.equals("http")
+                || scheme.equals("https")
+                || scheme.equals("rtsp")
+                || scheme.equals("rtmp")) {
+            mURL = uri.toString();
+        } else if (scheme.equals("content")) {
+            String[] proj = {MediaStore.Images.Media.DATA};
+            Cursor cursor = managedQuery(uri, proj, null, null, null);
+            int colidx = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            mURL = cursor.getString(colidx);
         }
+        mIsLive = mURL.startsWith("http://") && mURL.endsWith(".m3u8") || mURL.startsWith("rtmp://") || mURL.startsWith("rtsp://") || mURL.startsWith("avkcp://") || mURL.startsWith("ffrdp://");
+        mPlayer = new MediaPlayer(mHandler);
+        mPlayer.open(mURL, Constans.PLAYER_INIT_PARAMS);
 
         PlayerView mRoot = (PlayerView) findViewById(R.id.player_root);
         mRoot.setOnSizeChangedListener((w, h, oldw, oldh) -> {

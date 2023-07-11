@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -24,7 +23,6 @@ import com.zhtj.plugin.im.liveplayer.PlayerView;
  * 相对playeractivity做了简化,没有UI,没有本地视频播放和控制
  */
 public class NewPlayerActivity extends BaseActivity {
-    private static final String PLAYER_INIT_PARAMS = "video_hwaccel=0;init_timeout=2000;auto_reconnect=2000;audio_bufpktn=200;video_bufpktn=50;rtsp_transport=2;";
     private MediaPlayer mPlayer = null;
     private SurfaceView mVideo = null;
     private Surface mVideoSurface;
@@ -52,7 +50,7 @@ public class NewPlayerActivity extends BaseActivity {
         builder.setNegativeButton("cancel", (dialog, which) -> NewPlayerActivity.this.finish());
         builder.setPositiveButton("confirm", (dialog, which) -> {
             mPlayer = new MediaPlayer(mHandler);
-            mPlayer.open(Constans.PLAY_URL, PLAYER_INIT_PARAMS);
+            mPlayer.open(Constans.PLAY_URL, Constans.PLAYER_INIT_PARAMS);
             mPlayer.setDisplaySurface(mVideoSurface);
         });
         AlertDialog dlg = builder.create();
