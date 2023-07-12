@@ -45,12 +45,12 @@ public class NewPlayerActivity extends BaseActivity {
         final EditText edt = new EditText(this);
         edt.setHint("url:");
         edt.setSingleLine(true);
-        edt.setText(Constans.PLAY_URL);
+        edt.setText(Constans.STREAM_URL);
         builder.setView(edt);
         builder.setNegativeButton("cancel", (dialog, which) -> NewPlayerActivity.this.finish());
         builder.setPositiveButton("confirm", (dialog, which) -> {
             mPlayer = new MediaPlayer(mHandler);
-            mPlayer.open(Constans.PLAY_URL, Constans.PLAYER_INIT_PARAMS);
+            mPlayer.open(Constans.STREAM_URL, Constans.PLAYER_INIT_PARAMS);
             mPlayer.setDisplaySurface(mVideoSurface);
         });
         AlertDialog dlg = builder.create();
@@ -81,7 +81,7 @@ public class NewPlayerActivity extends BaseActivity {
                     @Override
                     public void surfaceDestroyed(SurfaceHolder holder) {
                         mVideoSurface = null;
-                        if (mPlayer != null) mPlayer.setDisplaySurface(mVideoSurface);
+                        if (mPlayer != null) mPlayer.setDisplaySurface(null);
                     }
                 }
         );
@@ -157,7 +157,7 @@ public class NewPlayerActivity extends BaseActivity {
                 }
                 break;
                 case MediaPlayer.MSG_OPEN_FAILED: {
-                    String str = String.format(getString(R.string.open_video_failed), Constans.PLAY_URL);
+                    String str = String.format(getString(R.string.open_video_failed), Constans.STREAM_URL);
                     Toast.makeText(NewPlayerActivity.this, str, Toast.LENGTH_LONG).show();
                 }
                 break;

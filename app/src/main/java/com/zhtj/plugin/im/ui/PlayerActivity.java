@@ -1,9 +1,7 @@
 package com.zhtj.plugin.im.ui;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
@@ -18,7 +16,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
@@ -55,7 +52,7 @@ public class PlayerActivity extends Activity {
         setContentView(R.layout.activity_player);
         mSharedPrefs = getSharedPreferences(PLAYER_SHARED_PREFS, Context.MODE_PRIVATE);
 
-        Uri uri = Uri.parse(Constans.PLAY_URL);
+        Uri uri = Uri.parse(Constans.STREAM_URL);
         String scheme = uri.getScheme();
         if (scheme.equals("file")) {
             mURL = uri.getPath();
@@ -249,7 +246,7 @@ public class PlayerActivity extends Activity {
     };
 
     private String readPlayerOpenURL() {
-        return mSharedPrefs.getString(KEY_PLAYER_OPEN_URL, Constans.PLAY_URL);
+        return mSharedPrefs.getString(KEY_PLAYER_OPEN_URL, Constans.STREAM_URL);
     }
 
     private void savePlayerOpenURL(String url) {
