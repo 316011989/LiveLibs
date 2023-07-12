@@ -185,8 +185,9 @@ public class VideoStreamNew extends VideoStreamBase
                 Log.i("john VideoCodecInfo", "width=" + width + ";height=" + height);
                 if (degree == 90 || degree == 270) {
                     mCallback.onVideoCodecInfo(height, width, mVideoParam.getFrameRate(), mVideoParam.getBitRate());
-                } else
+                } else {
                     mCallback.onVideoCodecInfo(width, height, mVideoParam.getFrameRate(), mVideoParam.getBitRate());
+                }
             }
         }
     }

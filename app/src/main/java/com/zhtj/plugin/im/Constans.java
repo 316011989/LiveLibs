@@ -16,7 +16,7 @@ public class Constans {
     //http live stream播放地址
 
     public static final String PLAYER_INIT_PARAMS =
-            "video_hwaccel=1;" +
+            "video_hwaccel=0;" +
                     "init_timeout=2000;" +
                     "auto_reconnect=2000;" +
                     "audio_bufpktn=200;" +

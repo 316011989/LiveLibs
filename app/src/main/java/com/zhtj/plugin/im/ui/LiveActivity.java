@@ -51,8 +51,10 @@ public class LiveActivity extends BaseActivity implements View.OnClickListener, 
         orientationHandler = new OrientationHandler(this);
         orientationHandler.enable();
         orientationHandler.setOnOrientationListener(orientation -> {
+                    livePusher.stopPush();
                     int previewDegree = (orientation + 90) % 360;
                     livePusher.setPreviewDegree(previewDegree);
+                    new Handler().postDelayed(() -> livePusher.startPush(Constans.LIVE_URL, LiveActivity.this), 2000);
                 }
         );
     }
