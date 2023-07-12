@@ -69,7 +69,7 @@ public class LiveActivity extends BaseActivity implements View.OnClickListener, 
     private void initPusher() {
         int width = 640;
         int height = 480;
-        int videoBitRate = 800000;// kb/s
+        int videoBitRate = 1800000;// kb/s
         int videoFrameRate = 30;// fps
         VideoParam videoParam = new VideoParam(width, height, Integer.parseInt(Camera2Helper.CAMERA_ID_FRONT)
                 , videoBitRate, videoFrameRate);
