@@ -1,15 +1,28 @@
 package com.zhtj.plugin.im.ui;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.zhtj.plugin.im.BaseActivity;
@@ -23,8 +36,11 @@ import com.zhtj.plugin.im.liveplayer.PlayerView;
  * 相对playeractivity做了简化,没有UI,没有本地视频播放和控制
  */
 public class NewPlayerActivity extends BaseActivity {
+    private static final String TAG = "fanplayer";
+    private static final String DEF_PLAYER_OPEN_URL = "rtsp://192.168.0.148/video0";
     private MediaPlayer mPlayer = null;
-    private SurfaceView mVideo = null;
+    private boolean mIsPlaying = false;
+    private boolean mIsLive = false;
     private Surface mVideoSurface;
     private int mVideoViewW;
     private int mVideoViewH;
@@ -47,25 +63,28 @@ public class NewPlayerActivity extends BaseActivity {
         edt.setSingleLine(true);
         edt.setText(Constans.STREAM_URL);
         builder.setView(edt);
-        builder.setNegativeButton("cancel", (dialog, which) -> NewPlayerActivity.this.finish());
-        builder.setPositiveButton("confirm", (dialog, which) -> {
-            mPlayer = new MediaPlayer(mHandler);
-            mPlayer.open(Constans.STREAM_URL, Constans.PLAYER_INIT_PARAMS);
+        builder.setNegativeButton("退出", (dialog, which) -> NewPlayerActivity.this.finish());
+        builder.setPositiveButton("播放", (dialog, which) -> {
+            String mURL = edt.getText().toString();
+            mIsLive = mURL.startsWith("http://") && mURL.endsWith(".m3u8") || mURL.startsWith("rtmp://") || mURL.startsWith("rtsp://") || mURL.startsWith("avkcp://") || mURL.startsWith("ffrdp://");
+            mPlayer = new MediaPlayer(mURL, mHandler, Constans.PLAYER_INIT_PARAMS);
             mPlayer.setDisplaySurface(mVideoSurface);
+            testPlayerPlay(true);
         });
         AlertDialog dlg = builder.create();
         dlg.show();
 
-        PlayerView mRoot = (PlayerView) findViewById(R.id.player_root);
-        mRoot.setOnSizeChangedListener((w, h, oldw, oldh) -> {
-            mVideo.setVisibility(View.INVISIBLE);
-            mVideoViewW = w;
-            mVideoViewH = h;
-            mHandler.sendEmptyMessage(MSG_UDPATE_VIEW_SIZE);
+        binding.playerRoot.setOnSizeChangedListener(new PlayerView.OnSizeChangedListener() {
+            @Override
+            public void onSizeChanged(int w, int h, int oldw, int oldh) {
+                binding.videoView.setVisibility(View.INVISIBLE);
+                mVideoViewW = w;
+                mVideoViewH = h;
+                mHandler.sendEmptyMessage(MSG_UDPATE_VIEW_SIZE);
+            }
         });
 
-        mVideo = (SurfaceView) findViewById(R.id.video_view);
-        mVideo.getHolder().addCallback(
+        binding.videoView.getHolder().addCallback(
                 new SurfaceHolder.Callback() {
                     @Override
                     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
@@ -81,11 +100,10 @@ public class NewPlayerActivity extends BaseActivity {
                     @Override
                     public void surfaceDestroyed(SurfaceHolder holder) {
                         mVideoSurface = null;
-                        if (mPlayer != null) mPlayer.setDisplaySurface(null);
+                        if (mPlayer != null) mPlayer.setDisplaySurface(mVideoSurface);
                     }
                 }
         );
-
     }
 
     @Override
@@ -98,29 +116,31 @@ public class NewPlayerActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        testPlayerPlay(true);
+        if (!mIsLive) testPlayerPlay(true);
     }
 
     @Override
     public void onPause() {
-        testPlayerPlay(false);
+        if (!mIsLive) testPlayerPlay(false);
         super.onPause();
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getActionMasked() == MotionEvent.ACTION_DOWN) {
-        }
-        return super.dispatchTouchEvent(ev);
-    }
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        if (ev.getActionMasked() == MotionEvent.ACTION_DOWN) {
+//        }
+//        return super.dispatchTouchEvent(ev);
+//    }
 
     private void testPlayerPlay(boolean play) {
         if (mPlayer == null) return;
         if (play) {
             mPlayer.play();
+            mIsPlaying = true;
             mHandler.sendEmptyMessage(MSG_UPDATE_PROGRESS);
         } else {
             mPlayer.pause();
+            mIsPlaying = false;
             mHandler.removeMessages(MSG_UPDATE_PROGRESS);
         }
     }
@@ -135,22 +155,24 @@ public class NewPlayerActivity extends BaseActivity {
             switch (msg.what) {
                 case MSG_UPDATE_PROGRESS: {
                     mHandler.sendEmptyMessageDelayed(MSG_UPDATE_PROGRESS, 200);
-                    int progress = mPlayer != null ? (int) mPlayer.getParam(MediaPlayer.PARAM_MEDIA_POSITION) : 0;
+//                    int progress = mPlayer != null ? (int) mPlayer.getParam(MediaPlayer.PARAM_MEDIA_POSITION) : 0;
                 }
                 break;
                 case MSG_HIDE_BUTTONS: {
+//                    mSeek.setVisibility(View.INVISIBLE);
+//                    mPause.setVisibility(View.INVISIBLE);
                 }
                 break;
                 case MSG_UDPATE_VIEW_SIZE: {
-                    if (mPlayer != null && mPlayer.initVideoSize(mVideoViewW, mVideoViewH, mVideo)) {
-                        mVideo.setVisibility(View.VISIBLE);
+                    if (mPlayer != null && mPlayer.initVideoSize(mVideoViewW, mVideoViewH, binding.videoView)) {
+                        binding.videoView.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
                 case MediaPlayer.MSG_OPEN_DONE: {
                     if (mPlayer != null) {
                         mPlayer.setDisplaySurface(mVideoSurface);
-                        mVideo.setVisibility(View.INVISIBLE);
+                        binding.videoView.setVisibility(View.INVISIBLE);
                         mHandler.sendEmptyMessage(MSG_UDPATE_VIEW_SIZE);
                         testPlayerPlay(true);
                     }
@@ -162,16 +184,17 @@ public class NewPlayerActivity extends BaseActivity {
                 }
                 break;
                 case MediaPlayer.MSG_PLAY_COMPLETED: {
-                    finish();
+                    if (!mIsLive) finish();
                 }
                 break;
                 case MediaPlayer.MSG_VIDEO_RESIZED: {
-                    mVideo.setVisibility(View.INVISIBLE);
+                    binding.videoView.setVisibility(View.INVISIBLE);
                     mHandler.sendEmptyMessage(MSG_UDPATE_VIEW_SIZE);
                 }
                 break;
             }
         }
     };
+
 }
 

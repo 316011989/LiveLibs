@@ -1,4 +1,4 @@
-// ╟Э╨╛м╥нд╪Ч
+// О©╫О©╫О©╫О©╫м╥О©╫д╪О©╫
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
 #include "fanplayer_jni.h"
@@ -10,7 +10,7 @@
 extern "C" int av_jni_set_java_vm(void *vm, void *log_ctx);
 
 /*
- * Class:     com_rockcarry_fanplayer_MediaPlayer
+ * Class:     com_zhtj_plugin_im_liveplayer_MediaPlayer
  * Method:    nativeOpen
  * Signature: (Ljava/lang/String;Ljava/lang/Object;IILjava/lang/String;)J
  */
@@ -36,7 +36,7 @@ static jlong JNICALL nativeOpen(JNIEnv *env, jobject obj, jstring url, jobject j
 }
 
 /*
- * Class:     com_rockcarry_fanplayer_MediaPlayer
+ * Class:     com_zhtj_plugin_im_liveplayer_MediaPlayer
  * Method:    nativeClose
  * Signature: (J)V
  */
@@ -48,7 +48,7 @@ static void nativeClose(JNIEnv *env, jobject obj, jlong hplayer)
 }
 
 /*
- * Class:     com_rockcarry_fanplayer_MediaPlayer
+ * Class:     com_zhtj_plugin_im_liveplayer_MediaPlayer
  * Method:    nativePlay
  * Signature: (J)V
  */
@@ -60,7 +60,7 @@ static void JNICALL nativePlay(JNIEnv *env, jobject obj, jlong hplayer)
 }
 
 /*
- * Class:     com_rockcarry_fanplayer_MediaPlayer
+ * Class:     com_zhtj_plugin_im_liveplayer_MediaPlayer
  * Method:    nativePause
  * Signature: (J)V
  */
@@ -72,7 +72,7 @@ static void JNICALL nativePause(JNIEnv *env, jobject obj, jlong hplayer)
 }
 
 /*
- * Class:     com_rockcarry_fanplayer_MediaPlayer
+ * Class:     com_zhtj_plugin_im_liveplayer_MediaPlayer
  * Method:    nativeSeek
  * Signature: (JJ)V
  */
@@ -84,7 +84,7 @@ static void JNICALL nativeSeek(JNIEnv *env, jobject obj, jlong hplayer, jlong ms
 }
 
 /*
- * Class:     com_rockcarry_fanplayer_MediaPlayer
+ * Class:     com_zhtj_plugin_im_liveplayer_MediaPlayer
  * Method:    nativeSetParam
  * Signature: (JIJ)V
  */
@@ -96,7 +96,7 @@ static void JNICALL nativeSetParam(JNIEnv *env, jobject obj, jlong hplayer, jint
 }
 
 /*
- * Class:     com_rockcarry_fanplayer_MediaPlayer
+ * Class:     com_zhtj_plugin_im_liveplayer_MediaPlayer
  * Method:    nativeGetParam
  * Signature: (JI)J
  */
@@ -110,7 +110,7 @@ static jlong JNICALL nativeGetParam(JNIEnv *env, jobject obj, jlong hplayer, jin
 }
 
 /*
- * Class:     com_rockcarry_fanplayer_MediaPlayer
+ * Class:     com_zhtj_plugin_im_liveplayer_MediaPlayer
  * Method:    nativeSetDisplaySurface
  * Signature: (JLjava/lang/Object;)V
  */
@@ -144,7 +144,6 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
         __android_log_print(ANDROID_LOG_ERROR, "fanplayer_jni", "ERROR: GetEnv failed\n");
         return -1;
     }
-
     jclass cls = env->FindClass("com/zhtj/plugin/im/liveplayer/MediaPlayer");
     int ret = env->RegisterNatives(cls, g_methods, sizeof(g_methods)/sizeof(g_methods[0]));
     if (ret != JNI_OK) {

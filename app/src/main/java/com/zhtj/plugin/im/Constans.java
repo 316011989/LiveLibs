@@ -19,8 +19,8 @@ public class Constans {
             "video_hwaccel=1;" +
                     "init_timeout=2000;" +
                     "auto_reconnect=2000;" +
-                    "audio_bufpktn=40;" +
-                    "video_bufpktn=10;" +
+                    "audio_bufpktn=200;" +
+                    "video_bufpktn=50;" +
 //                    "video_frame_rate=30;" +
 //                    "video_stream_total=1;" +
 //                    "video_thread_count=2;" +
@@ -29,7 +29,7 @@ public class Constans {
 //                    "audio_sample_rate=44100;" +
 //                    "audio_stream_total=1;" +
 //                    "open_syncmode=1;" +
-//                    "rtsp_transport=2;" +
+                    "rtsp_transport=2;" +
                     "";
 
 }

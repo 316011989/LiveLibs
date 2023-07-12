@@ -69,7 +69,7 @@ public class PlayerActivity extends Activity {
             mURL = cursor.getString(colidx);
         }
         mIsLive = mURL.startsWith("http://") && mURL.endsWith(".m3u8") || mURL.startsWith("rtmp://") || mURL.startsWith("rtsp://") || mURL.startsWith("avkcp://") || mURL.startsWith("ffrdp://");
-        mPlayer = new MediaPlayer(mHandler);
+        mPlayer = new MediaPlayer(Constans.STREAM_URL,mHandler,Constans.PLAYER_INIT_PARAMS);
         mPlayer.open(mURL, Constans.PLAYER_INIT_PARAMS);
 
         PlayerView mRoot = (PlayerView) findViewById(R.id.player_root);

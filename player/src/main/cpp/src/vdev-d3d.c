@@ -247,10 +247,15 @@ static void d3d_draw_surf(VDEVD3DCTXT *c, LPDIRECT3DSURFACE9 surf)
 static void* video_render_thread_proc(void *param)
 {
     VDEVD3DCTXT *c = (VDEVD3DCTXT*)param;
-
     while (!(c->status & VDEV_CLOSE)) {
+        struct timespec ts;
+        int    ret = 0;
+        clock_gettime(CLOCK_REALTIME, &ts);
+        ts.tv_nsec += 100 * 1000 * 1000;
+        ts.tv_sec  += ts.tv_nsec / 1000000000;
+        ts.tv_nsec %= 1000000000;
         pthread_mutex_lock(&c->mutex);
-        while (c->size <= 0 && (c->status & VDEV_CLOSE) == 0) pthread_cond_wait(&c->cond, &c->mutex);
+        while (c->size <= 0 && (c->status & VDEV_CLOSE) == 0 && ret != ETIMEDOUT) ret = pthread_cond_timedwait(&c->cond, &c->mutex, &ts);
         if (c->size > 0) {
             c->size--;
             if (c->ppts[c->head] != -1) {
@@ -267,7 +272,7 @@ static void* video_render_thread_proc(void *param)
         // handle av-sync & frame rate & complete
         vdev_avsync_and_complete(c);
     }
-
+    d3d_release_and_create(c, 1, 0);
     return NULL;
 }
 
@@ -370,7 +375,6 @@ static void vdev_d3d_destroy(void *ctxt)
 {
     VDEVD3DCTXT *c = (VDEVD3DCTXT*)ctxt;
 
-    d3d_release_and_create(c, 1, 0);
     if (c->pD3D9) IDirect3D9_Release(c->pD3D9);
     if (c->hDll ) FreeLibrary(c->hDll);
 

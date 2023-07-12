@@ -72,8 +72,6 @@ void* adev_create(int type, int bufnum, int buflen, CMNVARS *cmnvars)
     result = waveOutOpen(&ctxt->hWaveOut, ctxt->cmnvars->init_params->waveout_device_id, &wfx, (DWORD_PTR)waveOutProc, (DWORD_PTR)ctxt, CALLBACK_FUNCTION);
     if (result != MMSYSERR_NOERROR) {
         CloseHandle(ctxt->bufsem);
-        free(ctxt->ppts    );
-        free(ctxt->pWaveHdr);
         free(ctxt);
         return NULL;
     }
@@ -119,33 +117,5 @@ void adev_write(void *ctxt, uint8_t *buf, int len, int64_t pts)
     c->ppts[c->tail] = pts; if (++c->tail == c->bufnum) c->tail = 0;
 }
 
-void adev_pause(void *ctxt, int pause)
-{
-    ADEV_CONTEXT *c = (ADEV_CONTEXT*)ctxt;
-    if (!ctxt) return;
-    if (pause) waveOutPause  (c->hWaveOut);
-    else       waveOutRestart(c->hWaveOut);
-}
-
-void adev_reset(void *ctxt)
-{
-    ADEV_CONTEXT *c = (ADEV_CONTEXT*)ctxt;
-    if (!ctxt) return;
-    waveOutReset(c->hWaveOut);
-    c->head = c->tail = 0;
-    ReleaseSemaphore(c->bufsem, c->bufnum, NULL);
-}
-
-void adev_setparam(void *ctxt, int id, void *param)
-{
-    ADEV_CONTEXT *c = (ADEV_CONTEXT*)ctxt;
-    if (!ctxt) return;
-    switch (id) {
-    case PARAM_RENDER_STOP:
-        c->status |= ADEV_CLOSE;
-        waveOutReset(c->hWaveOut);
-        break;
-    }
-}
-
+void adev_setparam(void *ctxt, int id, void *param) {}
 void adev_getparam(void *ctxt, int id, void *param) {}
