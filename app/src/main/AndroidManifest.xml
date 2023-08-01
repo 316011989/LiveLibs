@@ -134,6 +134,7 @@
                 <data android:mimeType="application/x-mpegurl" />
             </intent-filter>
         </activity>
+        <activity android:name="com.zhtj.plugin.im.ui.LiveSRTActivity" />
     </application>
 
 </manifest>

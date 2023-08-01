@@ -27,7 +27,6 @@ import android.view.TextureView;
 
 import androidx.annotation.NonNull;
 
-
 import com.zhtj.plugin.im.live.util.YuvUtil;
 
 import java.nio.ByteBuffer;
@@ -582,6 +581,7 @@ public class Camera2Helper {
                     }
                     offset += len / 4;
                 }
+
                 if (rotateDegree == 90) {
                     dstData = new byte[len * 3 / 2];
                     YuvUtil.NV21toI420andRotate(yuvData, dstData, width, height, 270);
@@ -608,7 +608,6 @@ public class Camera2Helper {
                 if (camera2Listener != null) {
                     camera2Listener.onPreviewFrame(dstData);
                 }
-
                 lock.unlock();
             }
             image.close();

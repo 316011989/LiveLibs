@@ -1,28 +1,13 @@
 package com.zhtj.plugin.im.ui;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.zhtj.plugin.im.BaseActivity;
@@ -30,14 +15,11 @@ import com.zhtj.plugin.im.Constans;
 import com.zhtj.plugin.im.R;
 import com.zhtj.plugin.im.databinding.ActivityNewplayerBinding;
 import com.zhtj.plugin.im.liveplayer.MediaPlayer;
-import com.zhtj.plugin.im.liveplayer.PlayerView;
 
 /**
  * 相对playeractivity做了简化,没有UI,没有本地视频播放和控制
  */
 public class NewPlayerActivity extends BaseActivity {
-    private static final String TAG = "fanplayer";
-    private static final String DEF_PLAYER_OPEN_URL = "rtsp://192.168.0.148/video0";
     private MediaPlayer mPlayer = null;
     private boolean mIsPlaying = false;
     private boolean mIsLive = false;
@@ -74,14 +56,11 @@ public class NewPlayerActivity extends BaseActivity {
         AlertDialog dlg = builder.create();
         dlg.show();
 
-        binding.playerRoot.setOnSizeChangedListener(new PlayerView.OnSizeChangedListener() {
-            @Override
-            public void onSizeChanged(int w, int h, int oldw, int oldh) {
-                binding.videoView.setVisibility(View.INVISIBLE);
-                mVideoViewW = w;
-                mVideoViewH = h;
-                mHandler.sendEmptyMessage(MSG_UDPATE_VIEW_SIZE);
-            }
+        binding.playerRoot.setOnSizeChangedListener((w, h, oldw, oldh) -> {
+            binding.videoView.setVisibility(View.INVISIBLE);
+            mVideoViewW = w;
+            mVideoViewH = h;
+            mHandler.sendEmptyMessage(MSG_UDPATE_VIEW_SIZE);
         });
 
         binding.videoView.getHolder().addCallback(
@@ -100,7 +79,7 @@ public class NewPlayerActivity extends BaseActivity {
                     @Override
                     public void surfaceDestroyed(SurfaceHolder holder) {
                         mVideoSurface = null;
-                        if (mPlayer != null) mPlayer.setDisplaySurface(mVideoSurface);
+                        if (mPlayer != null) mPlayer.setDisplaySurface(null);
                     }
                 }
         );

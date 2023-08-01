@@ -3,12 +3,15 @@ package com.zhtj.plugin.im;
 public class Constans {
 
     //推流地址
-    public static final String LIVE_URL = "rtmp://192.168.10.115:32497/live/user_token";//内网服务器
+//    public static final String LIVE_URL = "rtmp://192.168.10.115:32497/live/user_token";//内网服务器
+    public static final String LIVE_URL = "srt://124.71.38.39:10080?streamid=#!::h=live/livelibs,m=publish";//内网服务器
+
 //    public static final String LIVE_URL = "rtmp://124.71.38.39:1935/live/user_token";//华为服务器
 
 
     //播放地址
-    public static final String STREAM_URL = "rtmp://192.168.10.115:32497/live/user_token";//rtmp播放地址
+//    public static final String STREAM_URL = "rtmp://192.168.10.115:32497/live/user_token";//rtmp播放地址
+    public static final String STREAM_URL = "srt://124.71.38.39:10080?streamid=#!::h=live/livelibs,m=request";//rtmp播放地址
 //    public static final String STREAM_URL = "http://192.168.10.115:8080/live/user_token.flv";//http flv播放地址
 //     public static final String STREAM_URL ="http://192.168.10.115:8080/live/user_token.m3u8"
 //    public static final String STREAM_URL = "rtmp://124.71.38.39:1935/live/user_token";//华为服务器

@@ -3,15 +3,14 @@ cmake_minimum_required(VERSION 3.22.1)
 project("livelibs")
 
 include_directories(include)
-#include_directories(include/${CMAKE_ANDROID_ARCH_ABI}/polarssl/)
-#include_directories(include/${CMAKE_ANDROID_ARCH_ABI}/librtmp/)
 
 
 add_library(live SHARED
         native-lib.cpp
         AudioStream.cpp
         VideoStream.cpp
-        RtmpPusher.cpp)
+        RtmpPusher.cpp
+        )
 
 add_library(yuv STATIC IMPORTED)
 set_target_properties(yuv PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libyuv.a)
@@ -30,12 +29,11 @@ set_target_properties(faac PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../.
 add_library(x264 STATIC IMPORTED)
 set_target_properties(x264 PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libx264.a)
 
-
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 find_library(log-lib log)
 
 target_link_libraries(live yuv faac x264 rtmp
-#        -landroid
-#        -ljnigraphics
+        #        -landroid
+        #        -ljnigraphics
         ${log-lib})

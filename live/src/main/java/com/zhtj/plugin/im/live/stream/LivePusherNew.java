@@ -14,13 +14,13 @@ import com.zhtj.plugin.im.live.param.VideoParam;
 
 public class LivePusherNew implements OnFrameDataCallback {
 
-    private final static int ERROR_VIDEO_ENCODER_OPEN   = 0x01;
+    private final static int ERROR_VIDEO_ENCODER_OPEN = 0x01;
     private final static int ERROR_VIDEO_ENCODER_ENCODE = 0x02;
-    private final static int ERROR_AUDIO_ENCODER_OPEN   = 0x03;
+    private final static int ERROR_AUDIO_ENCODER_OPEN = 0x03;
     private final static int ERROR_AUDIO_ENCODER_ENCODE = 0x04;
-    private final static int ERROR_RTMP_CONNECT_SERVER  = 0x05;
-    private final static int ERROR_RTMP_CONNECT_STREAM  = 0x06;
-    private final static int ERROR_RTMP_SEND_PACKET     = 0x07;
+    private final static int ERROR_RTMP_CONNECT_SERVER = 0x05;
+    private final static int ERROR_RTMP_CONNECT_STREAM = 0x06;
+    private final static int ERROR_RTMP_SEND_PACKET = 0x07;
 
     static {
         System.loadLibrary("live");
@@ -176,6 +176,9 @@ public class LivePusherNew implements OnFrameDataCallback {
         }
     }
 
+    /**
+     * rtmp 方法
+     */
     private native void native_init();
 
     private native void native_start(String path);

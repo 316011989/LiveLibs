@@ -13,9 +13,10 @@ android {
         consumerProguardFiles "consumer-rules.pro"
         ndk {
             //APP的build.gradle设置支持的SO库架构
-            abiFilters 'arm64-v8a','armeabi-v7a' //'arm64-v8a' 'x86' 'x86_64' 'armeabi-v7a'
+//            abiFilters 'arm64-v8a','armeabi-v7a' ,'x86' ,'x86_64'
+            abiFilters 'arm64-v8a'
         }
-0    }
+    }
 
     buildTypes {
         release {
@@ -37,6 +38,10 @@ android {
 }
 
 dependencies {
+//    implementation 'io.github.thibaultbee:streampack-extension-srt:2.5.2'
+
+//    implementation 'io.github.thibaultbee:srtdroid:1.5.1'
+
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
 }
