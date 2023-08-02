@@ -40,7 +40,7 @@ android {
 dependencies {
 //    implementation 'io.github.thibaultbee:streampack-extension-srt:2.5.2'
 
-//    implementation 'io.github.thibaultbee:srtdroid:1.5.1'
+    implementation 'io.github.thibaultbee:srtdroid:1.5.1'
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'

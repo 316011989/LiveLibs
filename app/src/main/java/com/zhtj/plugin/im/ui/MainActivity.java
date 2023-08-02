@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.zhtj.plugin.im.BaseActivity;
 import com.zhtj.plugin.im.databinding.ActivityMainBinding;
+import com.zhtj.plugin.im.srt.LiveSrtActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -40,7 +41,7 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         });
         binding.btnSrtPush.setOnClickListener(view -> {
-            Intent intent = new Intent().setClass(this, LiveSRTActivity.class);
+            Intent intent = new Intent().setClass(this, LiveSrtActivity.class);
             startActivity(intent);
         });
         binding.btnPlay.setOnClickListener(view -> {

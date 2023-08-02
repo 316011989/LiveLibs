@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">LiveLibs</string>
 
-
-
     <string name="open_video_failed">Failed to open video url: %s !</string>
+    <string name="title_home">push</string>
+    <string name="title_dashboard">play</string>
+    <string name="title_notifications">camera</string>
 </resources>

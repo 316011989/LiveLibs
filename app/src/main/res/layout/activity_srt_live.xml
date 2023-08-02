@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.LiveActivity">
 
-<!--    <com.zhtj.plugin.im.live.srt.SrsCameraView-->
-<!--        android:id="@+id/camera_preview"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <SurfaceView
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_swap"

@@ -10,6 +10,7 @@ add_library(live SHARED
         AudioStream.cpp
         VideoStream.cpp
         RtmpPusher.cpp
+        SrtPusher.cpp
         )
 
 add_library(yuv STATIC IMPORTED)
@@ -29,11 +30,17 @@ set_target_properties(faac PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../.
 add_library(x264 STATIC IMPORTED)
 set_target_properties(x264 PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libx264.a)
 
+add_library(libsrt STATIC IMPORTED)
+set_target_properties(libsrt PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libsrt.a)
+
+add_library(libcrypto STATIC IMPORTED)
+set_target_properties(libcrypto PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libcrypto.a)
+
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 find_library(log-lib log)
 
-target_link_libraries(live yuv faac x264 rtmp
+target_link_libraries(live yuv faac x264 rtmp libsrt libcrypto
         #        -landroid
         #        -ljnigraphics
         ${log-lib})
