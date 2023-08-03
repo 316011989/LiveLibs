@@ -85,7 +85,6 @@ public class SrsPlayManager {
         mDataReceiver.stop();
         mDataReceiver.close();
         mTSDemuxer.stop();
-        ;
         mVideoDecoder.uninit();
         mAudioDecoder.uninit();
         mPlaying = false;

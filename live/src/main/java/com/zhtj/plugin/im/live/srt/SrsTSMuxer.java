@@ -315,9 +315,9 @@ public class SrsTSMuxer {
 //        mAudioMedia.mAudioFrame.pts = pts;
 //        mAudioMedia.mAudioFrame.dts = pts;
 
-        Log.i(TAG, String.format("audio frame=%d, pts=%d(%d), real_pts=%d, duration=%d, real_duration=%d.",
-                mAudioMedia.mAudioFrame.index, pts, pts/TS_90K_CLOCK, mAudioMedia.mAudioFrame.real_pts,
-                mAudioMedia.mAudioFrame.duration/TS_90K_CLOCK, pcr/TS_90K_CLOCK));
+//        Log.i(TAG, String.format("audio frame=%d, pts=%d(%d), real_pts=%d, duration=%d, real_duration=%d.",
+//                mAudioMedia.mAudioFrame.index, pts, pts/TS_90K_CLOCK, mAudioMedia.mAudioFrame.real_pts,
+//                mAudioMedia.mAudioFrame.duration/TS_90K_CLOCK, pcr/TS_90K_CLOCK));
 
         byte[] header = new byte[]{(byte) 0xFF, (byte) 0xF1, (byte) 0x50, (byte) 0x80, (byte) 0x2F, (byte) 0x7F, (byte) 0xFC};
         byte tmp = 0;
@@ -447,9 +447,9 @@ public class SrsTSMuxer {
         mVideoMedia.mVideoFrame.dts = pts;
         mVideoMedia.mVideoFrame.pcr = pcr;
 
-        Log.i(TAG, String.format("video frame=%d, pts=%d(%d), real_pts=%d, duration=%d, real_duration=%d.",
-                mVideoMedia.mVideoFrame.index, pts, pts/TS_90K_CLOCK, mVideoMedia.mVideoFrame.real_pts,
-                mVideoMedia.mVideoFrame.duration/TS_90K_CLOCK, pcr/TS_90K_CLOCK));
+//        Log.i(TAG, String.format("video frame=%d, pts=%d(%d), real_pts=%d, duration=%d, real_duration=%d.",
+//                mVideoMedia.mVideoFrame.index, pts, pts/TS_90K_CLOCK, mVideoMedia.mVideoFrame.real_pts,
+//                mVideoMedia.mVideoFrame.duration/TS_90K_CLOCK, pcr/TS_90K_CLOCK));
 
         // send each frame.
         while (bb.position() < bi.size) {
@@ -798,7 +798,7 @@ public class SrsTSMuxer {
     /**
      * the aac profile, for ADTS(HLS/TS)
      *
-     * @see https://github.com/simple-rtmp-server/srs/issues/310
+     * @see <a href="https://github.com/simple-rtmp-server/srs/issues/310">...</a>
      */
     private class SrsAacProfile {
         public final static int Reserved = 3;

@@ -32,8 +32,6 @@ public class MainActivity extends BaseActivity {
                     requestPermissions(permissions, 1001);
                 }
             }
-        } else {
-
         }
         // Example of a call to a native method
         binding.btnRtmpPush.setOnClickListener(view -> {

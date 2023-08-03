@@ -39,8 +39,8 @@ public class LiveSrtActivity extends AppCompatActivity {
     private SLSSurfaceView mSurfaceView;
 
     //private String mPublishURL = "udp://224.5.5.5:5001";
-    private String mPublishURL = "srt://192.168.1.181:10080?streamid=#!::h=live/liteplayer,m=publish";
-    private String mPlayURL = "srt://192.168.1.181:10080?streamid=#!::h=live/liteplayer,m=request";
+    private String mPublishURL = "srt://192.168.8.15:10080?streamid=#!::h=live/livelibs,m=publish";
+    private String mPlayURL = "srt://192.168.8.15:10080?streamid=#!::h=live/livelibs,m=request";
 
     private SrsCameraView mCameraView;
     private SrsPublishManager mPublishManager = null;

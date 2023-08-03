@@ -197,8 +197,8 @@ public class SrsCameraView extends SurfaceView {
                 params.setFlashMode(supportedFlashModes.get(0));
             }
         }
-        Camera.Size size = null;
         List<Camera.Size> sizes = params.getSupportedPictureSizes();
+        Camera.Size size = sizes.get(sizes.size()-1);
         for (int i = 0; i < sizes.size(); i++) {
             Camera.Size s = sizes.get(i);
             //Log.i(TAG, String.format("camera supported picture size %dx%d", s.width, s.height));
@@ -215,21 +215,21 @@ public class SrsCameraView extends SurfaceView {
         params.setPictureSize(size.width, size.height);
         Log.i(TAG, String.format("set the picture size in %dx%d", size.width, size.height));
 
-//        size = null;
-//        sizes = params.getSupportedPreviewSizes();
-//        for (int i = 0; i < sizes.size(); i++) {
-//            Camera.Size s = sizes.get(i);
-//            //Log.i(TAG, String.format("camera supported preview size %dx%d", s.width, s.height));
-//            if (size == null) {
-//                if (s.height == mPreviewHeight) {
-//                    size = s;
-//                }
-//            } else {
-//                if (s.width == mPreviewWidth) {
-//                    size = s;
-//                }
-//            }
-//        }
+        sizes = params.getSupportedPreviewSizes();
+        size = sizes.get(sizes.size()-1);
+        for (int i = 0; i < sizes.size(); i++) {
+            Camera.Size s = sizes.get(i);
+            //Log.i(TAG, String.format("camera supported preview size %dx%d", s.width, s.height));
+            if (size == null) {
+                if (s.height == mPreviewHeight) {
+                    size = s;
+                }
+            } else {
+                if (s.width == mPreviewWidth) {
+                    size = s;
+                }
+            }
+        }
         vsize = size;
         params.setPreviewSize(size.width, size.height);
         Log.i(TAG, String.format("set the preview size in %dx%d", size.width, size.height));
@@ -334,12 +334,10 @@ public class SrsCameraView extends SurfaceView {
     private Camera.Size adaptPreviewResolution(Camera.Size resolution) {
         float xdy = (float) resolution.width / (float) resolution.height;
         Camera.Size best = resolution;
-        Log.e("johnelon", "width=" + resolution.width);
         for (Camera.Size size : mCamera.getParameters().getSupportedPreviewSizes()) {
             if (size.equals(resolution)) {
                 return size;
             }
-            Log.e("johnelon", "for width=" + size.width);
             float tmp = Math.abs(((float) size.width / (float) size.height) - xdy);
             if (tmp == 0) {
                 best = size;
