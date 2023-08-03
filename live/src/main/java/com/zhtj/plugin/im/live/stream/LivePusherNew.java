@@ -2,6 +2,7 @@ package com.zhtj.plugin.im.live.stream;
 
 import android.app.Activity;
 import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 
 import com.zhtj.plugin.im.live.R;
@@ -43,6 +44,7 @@ public class LivePusherNew implements OnFrameDataCallback {
         audioStream = new AudioStream(this, audioParam);
         if (cameraType == CameraType.CAMERA1) {
             videoStream = new VideoStream(this, view, videoParam, activity);
+            setPreviewDisplay(((SurfaceView) view).getHolder());
         } else if (cameraType == CameraType.CAMERA2) {
             videoStream = new VideoStreamNew(this, view, videoParam, activity);
         }

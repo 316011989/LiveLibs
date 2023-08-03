@@ -222,10 +222,10 @@ public class SrsPublishManager{
 
 
     public void startPublish(String netUrl) {
-        if (netUrl.substring(0,6).equals("udp://")) {
+        if (netUrl.startsWith("udp://")) {
             mPublisher = new SrsMultiCastPublisher();
         }
-        else if (netUrl.substring(0,6).equals("srt://")){
+        else if (netUrl.startsWith("srt://")){
             mPublisher = new SrsSRTPublisher();
         }
         else {
@@ -233,7 +233,7 @@ public class SrsPublishManager{
             return ;
         }
 
-        mPublisher.setSaveFile();
+//        mPublisher.setSaveFile();
         if (mTSMuxer != null) {
             mTSMuxer.setPublisher(mPublisher);
             mTSMuxer.start(netUrl);

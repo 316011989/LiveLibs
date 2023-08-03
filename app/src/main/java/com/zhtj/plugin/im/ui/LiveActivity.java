@@ -79,7 +79,8 @@ public class LiveActivity extends BaseActivity implements View.OnClickListener, 
         int numChannels = 2;
         AudioParam audioParam = new AudioParam(sampleRate, channelConfig, audioFormat, numChannels);
         // Camera1: SurfaceView  Camera2: TextureView
-        livePusher = new LivePusherNew(this, videoParam, audioParam, binding.surfaceCamera, CameraType.CAMERA2);
+        livePusher = new LivePusherNew(this, videoParam, audioParam, binding.previewView, CameraType.CAMERA2);
+//        livePusher = new LivePusherNew(this, videoParam, audioParam, binding.previewView, CameraType.CAMERA1);
     }
 
     @Override

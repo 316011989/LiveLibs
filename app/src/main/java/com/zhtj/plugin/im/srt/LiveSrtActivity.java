@@ -32,18 +32,14 @@ public class LiveSrtActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 
-    private final String TAG = LiveSrtActivity.class.getSimpleName();
 
     private int mVideoWidth = 0;
     private int mVideoHeight = 0;
 
     private SLSSurfaceView mSurfaceView;
 
-    //    private JNISrt mSrt = new JNISrt();
     //private String mPublishURL = "udp://224.5.5.5:5001";
-//    private String mPublishURL = "srt://39.104.103.63:8080?streamid=uplive.sls.com/live/";
     private String mPublishURL = "srt://192.168.1.181:10080?streamid=#!::h=live/liteplayer,m=publish";
-    //    private String mPlayURL = "srt://39.104.103.63:8080?streamid=live.sls.com/live/";
     private String mPlayURL = "srt://192.168.1.181:10080?streamid=#!::h=live/liteplayer,m=request";
 
     private SrsCameraView mCameraView;
