@@ -1,6 +1,5 @@
 package com.zhtj.plugin.im.srt;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -16,33 +15,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.zhtj.plugin.im.R;
-import com.zhtj.plugin.im.live.srt.SLSSurfaceView;
-import com.zhtj.plugin.im.live.srt.SrsCameraView;
-import com.zhtj.plugin.im.live.srt.SrsPlayManager;
+import com.zhtj.plugin.im.databinding.ActivityLiveSrtBinding;
 import com.zhtj.plugin.im.live.srt.SrsPublishManager;
+import com.zhtj.plugin.im.liveplayer.srt.SrsPlayManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class LiveSrtActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
-
-
-    private int mVideoWidth = 0;
-    private int mVideoHeight = 0;
-
-    private SLSSurfaceView mSurfaceView;
-
     //private String mPublishURL = "udp://224.5.5.5:5001";
     private String mPublishURL = "srt://192.168.8.15:10080?streamid=#!::h=live/livelibs,m=publish";
     private String mPlayURL = "srt://192.168.8.15:10080?streamid=#!::h=live/livelibs,m=request";
-
-    private SrsCameraView mCameraView;
+    //    private String mPublishURL = "srt://192.168.1.181:10080?streamid=#!::h=live/livelibs,m=publish";
+//    private String mPlayURL = "srt://192.168.1.181:10080?streamid=#!::h=live/livelibs,m=request";
+    private ActivityLiveSrtBinding binding;
     private SrsPublishManager mPublishManager = null;
     private SrsPlayManager mPlayManager = null;
 
@@ -63,95 +53,22 @@ public class LiveSrtActivity extends AppCompatActivity {
     };
 
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    if (null == mPublishManager) {
-                        mPublishManager = new SrsPublishManager();
-                    }
-                    mCameraView = findViewById(R.id.camera_preview);
-                    mPublishManager.setCameraView(mCameraView);
-                    TextView localID = findViewById(R.id.localID);
-                    mPublishURL = localID.getText().toString();
-                    mPublishManager.start(mPublishURL);
-                    return true;
-                case R.id.navigation_dashboard:
-
-                    if (null == mPlayManager) {
-                        mPlayManager = new SrsPlayManager();
-                    }
-
-                    mSurfaceView = findViewById(R.id.video_surface);
-                    mPlayManager.setSurfaceView(mSurfaceView);
-                    TextView peerID = findViewById(R.id.peerID);
-                    mPlayURL = peerID.getText().toString();
-                    mPlayManager.start(mPlayURL);
-
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    if (mPublishManager != null)
-                        mPublishManager.switchCameraFace();
-                    return true;
-            }
-            return false;
-        }
-    };
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_live_srt);
+        binding = ActivityLiveSrtBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // response screen rotation event
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
-        mTextMessage = findViewById(R.id.message);
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        //check camera permission
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED) {
-            Log.i("TEST", "Granted");
-            //init(barcodeScannerView, getIntent(), null);
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA}, 1);//1 can be another integer
-        }
-
-        //check the file permission
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED) {
-            Log.i("TEST", "Granted");
-            //init(barcodeScannerView, getIntent(), null);
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);//1 can be another integer
-        }
-        //check audio record
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-                == PackageManager.PERMISSION_GRANTED) {
-            Log.i("TEST", "Granted");
-            //init(barcodeScannerView, getIntent(), null);
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.RECORD_AUDIO}, 1);//1 can be another integer
-        }
+        binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
         //init url
-        TextView peerID = findViewById(R.id.peerID);
-        peerID.setText(mPlayURL);
-        TextView localID = findViewById(R.id.localID);
-        localID.setText(mPublishURL);
+        binding.peerID.setText(mPlayURL);
+        binding.localID.setText(mPublishURL);
 
         //start timer
         startLogTimer();
@@ -172,6 +89,43 @@ public class LiveSrtActivity extends AppCompatActivity {
             }
         }
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    if (null == mPublishManager) {
+                        mPublishManager = new SrsPublishManager();
+                    }
+                    mPublishManager.setCameraView(binding.cameraPreview);
+                    TextView localID = findViewById(R.id.localID);
+                    mPublishURL = localID.getText().toString();
+                    mPublishManager.start(mPublishURL);
+                    return true;
+                case R.id.navigation_dashboard:
+
+                    if (null == mPlayManager) {
+                        mPlayManager = new SrsPlayManager();
+                    }
+
+                    mPlayManager.setSurfaceView(binding.videoSurface);
+                    mPlayURL = binding.peerID.getText().toString();
+                    mPlayManager.start(mPlayURL);
+
+                    return true;
+                case R.id.navigation_notifications:
+                    binding.message.setText(R.string.title_notifications);
+                    if (mPublishManager != null)
+                        mPublishManager.switchCameraFace();
+                    return true;
+            }
+            return false;
+        }
+    };
+
 
     @Override
     protected void onStart() {

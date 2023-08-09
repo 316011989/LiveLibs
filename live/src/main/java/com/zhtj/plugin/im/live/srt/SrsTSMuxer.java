@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SrsTSMuxer {
 
     private volatile boolean connected = false;
-    private SrsPublisher mPublisher = null;
+    private SrsSRTPublisher mPublisher = null;
     //private RtmpHandler mHandler;
 
     private Thread worker;
@@ -159,7 +159,7 @@ public class SrsTSMuxer {
 
     }
 
-    void setPublisher(SrsPublisher publisher) {
+    void setPublisher(SrsSRTPublisher publisher) {
         mPublisher = publisher;
     }
 
@@ -227,7 +227,7 @@ public class SrsTSMuxer {
         boolean connected = mPublisher.open(netUrl);
 
         worker = new Thread(() -> {
-            while (!Thread.interrupted()) {
+            while (!Thread.interrupted() && connected) {
                 while (!mTSUDPPackList.isEmpty()) {
                     ByteBuffer tsUDPPack = mTSUDPPackList.poll();
                     int ret = sendTSPack(tsUDPPack);
@@ -638,7 +638,7 @@ public class SrsTSMuxer {
                 }
 
                 pes_size = pes_frame.len + header_size + 3;
-                if (pes_size > 0xFFFF || pes_frame.sid == TS_VIDEO_SID|| pes_frame.sid == TS_AUDIO_SID) {
+                if (pes_size > 0xFFFF || pes_frame.sid == TS_VIDEO_SID || pes_frame.sid == TS_AUDIO_SID) {
                     pes_size = 0;
                 }
 

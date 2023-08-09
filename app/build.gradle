@@ -8,9 +8,9 @@ android {
 
     defaultConfig {
         minSdk 21
-        targetSdk 33
-        versionCode 2
-        versionName "1.1"
+        targetSdk 28
+        versionCode 3
+        versionName "1.1.1"
     }
 
     buildTypes {
@@ -36,7 +36,7 @@ dependencies {
     implementation project(':live')
     implementation project(':player')
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

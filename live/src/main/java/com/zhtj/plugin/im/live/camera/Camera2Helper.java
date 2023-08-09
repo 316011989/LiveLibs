@@ -25,7 +25,6 @@ import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
 
-import androidx.annotation.NonNull;
 
 import com.zhtj.plugin.im.live.util.YuvUtil;
 
@@ -148,7 +147,7 @@ public class Camera2Helper {
     private final CameraDevice.StateCallback mDeviceStateCallback = new CameraDevice.StateCallback() {
 
         @Override
-        public void onOpened(@NonNull CameraDevice cameraDevice) {
+        public void onOpened(CameraDevice cameraDevice) {
             Log.i(TAG, "onOpened: ");
             mCameraOpenCloseLock.release();
             mCameraDevice = cameraDevice;
@@ -159,7 +158,7 @@ public class Camera2Helper {
         }
 
         @Override
-        public void onDisconnected(@NonNull CameraDevice cameraDevice) {
+        public void onDisconnected(CameraDevice cameraDevice) {
             Log.i(TAG, "onDisconnected: ");
             mCameraOpenCloseLock.release();
             cameraDevice.close();
@@ -170,7 +169,7 @@ public class Camera2Helper {
         }
 
         @Override
-        public void onError(@NonNull CameraDevice cameraDevice, int error) {
+        public void onError(CameraDevice cameraDevice, int error) {
             Log.i(TAG, "onError: ");
             mCameraOpenCloseLock.release();
             cameraDevice.close();
@@ -186,7 +185,7 @@ public class Camera2Helper {
     private final CameraCaptureSession.StateCallback mCaptureStateCallback = new CameraCaptureSession.StateCallback() {
 
         @Override
-        public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
+        public void onConfigured( CameraCaptureSession cameraCaptureSession) {
             Log.i(TAG, "onConfigured: ");
             // The camera is already closed
             if (null == mCameraDevice) {
@@ -205,8 +204,7 @@ public class Camera2Helper {
         }
 
         @Override
-        public void onConfigureFailed(
-                @NonNull CameraCaptureSession cameraCaptureSession) {
+        public void onConfigureFailed(CameraCaptureSession cameraCaptureSession) {
             Log.i(TAG, "onConfigureFailed: ");
             if (camera2Listener != null) {
                 camera2Listener.onCameraError(new Exception("configureFailed"));

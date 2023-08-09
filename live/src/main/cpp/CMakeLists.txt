@@ -10,7 +10,7 @@ add_library(live SHARED
         AudioStream.cpp
         VideoStream.cpp
         RtmpPusher.cpp
-        SrtPusher.cpp
+        SrtPush.cpp
         )
 
 add_library(yuv STATIC IMPORTED)

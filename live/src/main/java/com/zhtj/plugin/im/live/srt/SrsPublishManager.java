@@ -6,7 +6,7 @@ import android.util.Log;
 /**
  * Created by Leo Ma on 2016/7/25.
  */
-public class SrsPublishManager{
+public class SrsPublishManager {
 
     private final String TAG = SrsPublishManager.class.getSimpleName();
 
@@ -19,9 +19,9 @@ public class SrsPublishManager{
     protected long lastTimeMillis;
     protected double mSamplingFps;
 
-    protected SrsTSMuxer mTSMuxer    = null;
-    protected SrsEncoder    mEncoder    = null;
-    protected SrsPublisher  mPublisher  = null;
+    protected SrsTSMuxer mTSMuxer = null;
+    protected SrsEncoder mEncoder = null;
+    protected SrsSRTPublisher mPublisher = null;
 
     private boolean mPublishing = false;
 
@@ -69,6 +69,7 @@ public class SrsPublishManager{
 
         return true;
     }
+
     public boolean stop() {
         if (!mPublishing)
             return false;
@@ -117,6 +118,7 @@ public class SrsPublishManager{
 
         mCameraView.stopCamera();
     }
+
     public void startAudio() {
         if (null == mAudioCapture)
             mAudioCapture = new SrsAudioCapture();
@@ -128,112 +130,27 @@ public class SrsPublishManager{
         if (null != mAudioCapture)
             mAudioCapture.stopAudio();
     }
-/*
-    public void startAudio() {
-        mic = mEncoder.chooseAudioRecord();
-        if (mic == null) {
-            return;
-        }
 
-        if (AcousticEchoCanceler.isAvailable()) {
-            aec = AcousticEchoCanceler.create(mic.getAudioSessionId());
-            if (aec != null) {
-                aec.setEnabled(true);
-            }
-        }
-
-        if (AutomaticGainControl.isAvailable()) {
-            agc = AutomaticGainControl.create(mic.getAudioSessionId());
-            if (agc != null) {
-                agc.setEnabled(true);
-            }
-        }
-
-        aworker = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_AUDIO);
-                mic.startRecording();
-                while (!Thread.interrupted()) {
-                    if (sendVideoOnly) {
-                        mEncoder.onGetPcmFrame(mPcmBuffer, mPcmBuffer.length);
-                        try {
-                            // This is trivial...
-                            Thread.sleep(20);
-                        } catch (InterruptedException e) {
-                            break;
-                        }
-                    } else {
-                        int size = mic.read(mPcmBuffer, 0, mPcmBuffer.length);
-                        if (size > 0) {
-                            mEncoder.onGetPcmFrame(mPcmBuffer, size);
-                        }
-                    }
-                }
-            }
-        });
-        aworker.start();
-    }
-
-    public void stopAudio() {
-        if (aworker != null) {
-            aworker.interrupt();
-            try {
-                aworker.join();
-            } catch (InterruptedException e) {
-                aworker.interrupt();
-            }
-            aworker = null;
-        }
-
-        if (mic != null) {
-            mic.setRecordPositionUpdateListener(null);
-            mic.stop();
-            mic.release();
-            mic = null;
-        }
-
-        if (aec != null) {
-            aec.setEnabled(false);
-            aec.release();
-            aec = null;
-        }
-
-        if (agc != null) {
-            agc.setEnabled(false);
-            agc.release();
-            agc = null;
-        }
-    }
-*/
     public void startEncode() {
         mEncoder.setTSMuxer(mTSMuxer);
         mEncoder.setOutputResolution(mCameraView.getPreviewWidht(), mCameraView.getPreviewHeight());
-        if (!mEncoder.start()) {
-            return;
-        }
-        //startAudio();
+        mEncoder.start();
     }
 
     public void stopEncode() {
-        //stopAudio();
         mEncoder.stop();
     }
 
 
     public void startPublish(String netUrl) {
         if (netUrl.startsWith("udp://")) {
-            mPublisher = new SrsMultiCastPublisher();
-        }
-        else if (netUrl.startsWith("srt://")){
+//            mPublisher = new SrsMultiCastPublisher();
+        } else if (netUrl.startsWith("srt://")) {
             mPublisher = new SrsSRTPublisher();
-        }
-        else {
+        } else {
             Log.i(TAG, String.format("wrong netUrl='%s'", netUrl));
-            return ;
+            return;
         }
-
-//        mPublisher.setSaveFile();
         if (mTSMuxer != null) {
             mTSMuxer.setPublisher(mPublisher);
             mTSMuxer.start(netUrl);

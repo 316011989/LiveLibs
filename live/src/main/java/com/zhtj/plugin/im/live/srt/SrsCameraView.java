@@ -165,8 +165,8 @@ public class SrsCameraView extends SurfaceView {
 
         int VFPS = 24;
         Camera.Parameters params = mCamera.getParameters();
-        params.setPictureSize(mPreviewWidth, mPreviewHeight);
-        params.setPreviewSize(mPreviewWidth, mPreviewHeight);
+//        params.setPictureSize(mPreviewWidth, mPreviewHeight);
+//        params.setPreviewSize(mPreviewWidth, mPreviewHeight);
         int[] range = adaptFpsRange(VFPS, params.getSupportedPreviewFpsRange());
         params.setPreviewFpsRange(range[0], range[1]);
         //params.setPreviewFormat(ImageFormat.NV21);
@@ -197,26 +197,26 @@ public class SrsCameraView extends SurfaceView {
                 params.setFlashMode(supportedFlashModes.get(0));
             }
         }
-        List<Camera.Size> sizes = params.getSupportedPictureSizes();
-        Camera.Size size = sizes.get(sizes.size()-1);
-        for (int i = 0; i < sizes.size(); i++) {
-            Camera.Size s = sizes.get(i);
-            //Log.i(TAG, String.format("camera supported picture size %dx%d", s.width, s.height));
-            if (size == null) {
-                if (s.height == mPreviewHeight) {
-                    size = s;
-                }
-            } else {
-                if (s.width == mPreviewWidth) {
-                    size = s;
-                }
-            }
-        }
-        params.setPictureSize(size.width, size.height);
-        Log.i(TAG, String.format("set the picture size in %dx%d", size.width, size.height));
+        List<Camera.Size> sizes = params.getSupportedPreviewSizes();
+        Camera.Size size = sizes.get(sizes.size() - 1);
+//        for (int i = 0; i < sizes.size(); i++) {
+//            Camera.Size s = sizes.get(i);
+//            //Log.i(TAG, String.format("camera supported picture size %dx%d", s.width, s.height));
+//            if (size == null) {
+//                if (s.height == mPreviewHeight) {
+//                    size = s;
+//                }
+//            } else {
+//                if (s.width == mPreviewWidth) {
+//                    size = s;
+//                }
+//            }
+//        }
+//        params.setPictureSize(size.width, size.height);
+//        Log.i(TAG, String.format("set the picture size in %dx%d", size.width, size.height));
 
-        sizes = params.getSupportedPreviewSizes();
-        size = sizes.get(sizes.size()-1);
+//        size = null;
+//        sizes = params.getSupportedPreviewSizes();
         for (int i = 0; i < sizes.size(); i++) {
             Camera.Size s = sizes.get(i);
             //Log.i(TAG, String.format("camera supported preview size %dx%d", s.width, s.height));
@@ -230,6 +230,8 @@ public class SrsCameraView extends SurfaceView {
                 }
             }
         }
+        mPreviewWidth = size.width;
+        mPreviewHeight = size.height;
         vsize = size;
         params.setPreviewSize(size.width, size.height);
         Log.i(TAG, String.format("set the preview size in %dx%d", size.width, size.height));
@@ -265,7 +267,7 @@ public class SrsCameraView extends SurfaceView {
             if (mPreviewRotation == 90) {
                 frame = new byte[data.length];
                 int rotation = mCamId == mfrontCamId ? 90 : 270;
-                JNISrt.yv12RotationAnti(data, frame, vsize.width, vsize.height, rotation);
+                JniPush.yv12RotationAnti(data, frame, vsize.width, vsize.height, rotation);
                 w = vsize.height;
                 h = vsize.width;
             }
@@ -334,10 +336,12 @@ public class SrsCameraView extends SurfaceView {
     private Camera.Size adaptPreviewResolution(Camera.Size resolution) {
         float xdy = (float) resolution.width / (float) resolution.height;
         Camera.Size best = resolution;
+        Log.e("johnelon", "width=" + resolution.width);
         for (Camera.Size size : mCamera.getParameters().getSupportedPreviewSizes()) {
             if (size.equals(resolution)) {
                 return size;
             }
+            Log.e("johnelon", "for width=" + size.width);
             float tmp = Math.abs(((float) size.width / (float) size.height) - xdy);
             if (tmp == 0) {
                 best = size;
@@ -367,69 +371,5 @@ public class SrsCameraView extends SurfaceView {
         void onGetRgbaFrame(byte[] data, int width, int height);
     }
 
-    /**
-     * yuv format **
-     * <p>
-     * YUV420:
-     * YYYY
-     * YYYY
-     * YYYY
-     * YYYY
-     * UU
-     * UU
-     * VV
-     * VV
-     * <p>
-     * NV21:
-     * YYYY
-     * YYYY
-     * YYYY
-     * YYYY
-     * VUVU
-     * VUVU
-     * <p>
-     * YV12:
-     * YYYY
-     * YYYY
-     * YYYY
-     * YYYY
-     * VV
-     * VV
-     * UU
-     * UU
-     */
-
-    // the color transform, @see http://stackoverflow.com/questions/15739684/mediacodec-and-camera-color-space-incorrect
-    private static byte[] YV12toYUV420PackedSemiPlanar(final byte[] input, final byte[] output, final int width, final int height) {
-        /*
-         * COLOR_TI_FormatYUV420PackedSemiPlanar is NV12
-         * We convert by putting the corresponding U and V bytes together (interleaved).
-         */
-        final int frameSize = width * height;
-        final int qFrameSize = frameSize / 4;
-
-        System.arraycopy(input, 0, output, 0, frameSize); // Y
-
-        for (int i = 0; i < qFrameSize; i++) {
-            output[frameSize + i * 2] = input[frameSize + i + qFrameSize]; // Cb (U)
-            output[frameSize + i * 2 + 1] = input[frameSize + i]; // Cr (V)
-        }
-        return output;
-    }
-
-    private static byte[] YV12toYUV420Planar(byte[] input, byte[] output, int width, int height) {
-        /*
-         * COLOR_FormatYUV420Planar is I420 which is like YV12, but with U and V reversed.
-         * So we just have to reverse U and V.
-         */
-        final int frameSize = width * height;
-        final int qFrameSize = frameSize / 4;
-
-        System.arraycopy(input, 0, output, 0, frameSize); // Y
-        System.arraycopy(input, frameSize, output, frameSize + qFrameSize, qFrameSize); // Cr (V)
-        System.arraycopy(input, frameSize + qFrameSize, output, frameSize, qFrameSize); // Cb (U)
-
-        return output;
-    }
 
 }
