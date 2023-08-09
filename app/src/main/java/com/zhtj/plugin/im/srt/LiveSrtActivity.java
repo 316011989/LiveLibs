@@ -20,7 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.zhtj.plugin.im.R;
 import com.zhtj.plugin.im.databinding.ActivityLiveSrtBinding;
 import com.zhtj.plugin.im.live.srt.SrsPublishManager;
-import com.zhtj.plugin.im.liveplayer.srt.SrsPlayManager;
+import com.zhtj.plugin.im.srtplayer.SrsPlayManager;
 
 import java.util.Timer;
 import java.util.TimerTask;

@@ -21,7 +21,7 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    <com.zhtj.plugin.im.liveplayer.srt.SLSSurfaceView
+    <com.zhtj.plugin.im.srtplayer.SLSSurfaceView
         android:id="@+id/video_surface"
         android:layout_width="0dp"
         android:layout_height="400dp"

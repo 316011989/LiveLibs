@@ -12,7 +12,7 @@
     <file url="file://$PROJECT_DIR$/live/src/main/cpp/player/pktqueue.h" charset="GBK" />
     <file url="file://$PROJECT_DIR$/live/src/main/cpp/player/snapshot.c" charset="GBK" />
     <file url="file://$PROJECT_DIR$/live/src/main/cpp/player/snapshot.h" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/player/src/main/cpp/src/fanplayer_jni.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/player/src/main/cpp/include/src/fanplayer_jni.cpp" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

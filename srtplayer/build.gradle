@@ -1,16 +1,25 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
 }
 
 android {
-    namespace 'com.zhtj.plugin.im'
+    namespace 'com.zhtj.plugin.im.srtplayer'
     compileSdk 33
 
     defaultConfig {
         minSdk 21
         targetSdk 33
-        versionCode 3
-        versionName "1.1.1"
+        versionCode 1
+        versionName "1.0"
+
+        externalNativeBuild {
+            cmake {
+                abiFilters "arm64-v8a"
+                cppFlags "-std=c++11 -frtti -fexceptions"
+                arguments "-DANDROID_STL=c++_static"
+            }
+        }
+
     }
 
     buildTypes {
@@ -19,25 +28,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildFeatures {
-        viewBinding true
-    }
-    packagingOptions {
-        exclude 'lib/arm64-v8a/liblog.so'
-    }
-
 }
 
 dependencies {
-    implementation project(':live')
-    implementation project(':player')
-    implementation project(':srtplayer')
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

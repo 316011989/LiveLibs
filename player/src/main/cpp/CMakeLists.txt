@@ -3,7 +3,7 @@
 
 # Sets the minimum version of CMake required to build the native library.
 cmake_minimum_required(VERSION 3.4.1)
-
+set(CMAKE_VERBOSE_MAKEFILE on)
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
@@ -12,8 +12,9 @@ set(BUILD_LIB_NAME fanplayer_jni)
 set(libs "${CMAKE_SOURCE_DIR}/libs")
 
 include_directories(
-avkcpdemuxer
-ffrdpdemuxer
+        avkcpdemuxer
+        ffrdpdemuxer
+        lib
         src
         include
         utils
@@ -23,19 +24,11 @@ link_directories(
         ${libs}
 )
 
-find_library( # Sets the name of the path variable.
-        log-lib
+find_library(log-lib
+        log)
 
-        # Specifies the name of the NDK library that
-        # you want CMake to locate.
-        log )
-
-find_library( # Sets the name of the path variable.
-        GLESv2-lib
-
-        # Specifies the name of the NDK library that
-        # you want CMake to locate.
-        GLESv2 )
+find_library(GLESv2-lib
+        GLESv2)
 
 set(LINK_LIB_LIST
         avformat
@@ -56,7 +49,7 @@ set(LINK_LOCAL_LIB_LIST
         z
         android
         GLESv2
-)
+        )
 
 add_library( # Sets the name of the library.
         ${BUILD_LIB_NAME}
@@ -88,7 +81,7 @@ add_library( # Sets the name of the library.
 
 
 
-target_link_libraries( # Specifies the target library.
+target_link_libraries(
         ${BUILD_LIB_NAME}
         # Links the target library to the log library
         # included in the NDK.
